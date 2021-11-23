@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "mix",
+    "watch": "mix watch",
+    "prod": "mix --production"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.1.0",
+    "laravel-mix": "^6.0.39",
+    "postcss": "^8.2.1",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^2.0.2"
+  }
+}

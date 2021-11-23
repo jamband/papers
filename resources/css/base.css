@@ -1,0 +1,51 @@
+@import "tailwindcss/base";
+
+@layer base {
+  html,
+  body {
+    @apply text-gray-700 text-base;
+  }
+
+  h1 {
+    @apply mb-10 text-5xl font-semibold;
+  }
+
+  h2 {
+    @apply text-4xl font-semibold;
+  }
+
+  a {
+    @apply underline;
+
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.25em;
+  }
+
+  p {
+    @apply mb-5;
+  }
+
+  form {
+    @apply m-0;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  textarea
+  {
+    @apply px-3 py-1 bg-gray-100 border border-gray-200 rounded w-full md:w-1/2;
+  }
+
+  label {
+    @apply block;
+  }
+
+  button {
+    @apply px-3 py-1 bg-gray-600 text-gray-200 rounded;
+  }
+
+  svg {
+    @apply relative bottom-0.5 inline;
+  }
+}
