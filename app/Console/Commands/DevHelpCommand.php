@@ -15,7 +15,7 @@ class DevHelpCommand extends Command
     public function handle(): int
     {
         $this->table(['Requirements'], [
-            ['PHP', '>= 7.4'],
+            ['PHP', '>= 8.0'],
             ['Composer', '2.x'],
             ['Laravel', '8.x'],
             ['SQLite', '3'],
