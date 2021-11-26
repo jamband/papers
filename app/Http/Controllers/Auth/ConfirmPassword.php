@@ -19,9 +19,8 @@ class ConfirmPassword extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'auth', /** @see Authenticate */
-        ]);
+        /** @see Authenticate */
+        $this->middleware('auth');
     }
 
     public function view(): View

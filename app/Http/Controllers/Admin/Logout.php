@@ -17,10 +17,11 @@ class Logout extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'verified', /** @see EnsureEmailIsVerified */
-            'auth:admin', /** @see Authenticate */
-        ]);
+        /** @see EnsureEmailIsVerified */
+        $this->middleware('verified');
+
+        /** @see Authenticate */
+        $this->middleware('auth:admin');
     }
 
     public function __invoke(Request $request): RedirectResponse

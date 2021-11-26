@@ -17,9 +17,8 @@ class EmailVerificationPrompt extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'auth', /** @see Authenticate */
-        ]);
+        /** @see Authenticate */
+        $this->middleware('auth');
     }
 
     public function __invoke(Request $request): RedirectResponse|View

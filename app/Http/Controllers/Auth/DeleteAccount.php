@@ -20,11 +20,14 @@ class DeleteAccount extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'verified', /** @see EnsureEmailIsVerified */
-            'auth', /** @see Authenticate */
-            'password.confirm', /** @see RequirePassword */
-        ]);
+        /** @see EnsureEmailIsVerified */
+        $this->middleware('verified');
+
+        /** @see Authenticate */
+        $this->middleware('auth');
+
+        /** @see RequirePassword */
+        $this->middleware('password.confirm');
     }
 
     public function view(): View

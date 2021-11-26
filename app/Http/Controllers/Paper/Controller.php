@@ -17,10 +17,11 @@ class Controller extends BaseController
     {
         parent::__construct();
 
-        $this->middleware([
-            'verified', /** @see EnsureEmailIsVerified */
-            'auth', /** @see Authenticate */
-        ]);
+        /** @see EnsureEmailIsVerified */
+        $this->middleware('verified');
+
+        /** @see Authenticate */
+        $this->middleware('auth');
     }
 
     protected function findModel(int $id): Model

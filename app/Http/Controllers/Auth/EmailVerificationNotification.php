@@ -17,10 +17,11 @@ class EmailVerificationNotification extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'auth', /** @see Authenticate */
-            'throttle:6,1', /** @see ThrottleRequests */
-        ]);
+        /** @see Authenticate */
+        $this->middleware('auth');
+
+        /** @see ThrottleRequests */
+        $this->middleware('throttle:6,1');
     }
 
     public function __invoke(Request $request): RedirectResponse

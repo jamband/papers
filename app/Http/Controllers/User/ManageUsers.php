@@ -15,9 +15,8 @@ class ManageUsers extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'auth:admin', /** @see Authenticate */
-        ]);
+        /** @see Authenticate */
+        $this->middleware('auth:admin');
     }
 
     public function __invoke(): View

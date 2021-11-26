@@ -20,9 +20,8 @@ class Register extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'guest', /** @see RedirectIfAuthenticated */
-        ]);
+        /** @see RedirectIfAuthenticated */
+        $this->middleware('guest');
     }
 
     public function view(): View

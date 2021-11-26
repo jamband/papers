@@ -16,10 +16,11 @@ class GetUserProfile extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'verified', /** @see EnsureEmailIsVerified */
-            'auth', /** @see Authenticate */
-        ]);
+        /** @see EnsureEmailIsVerified */
+        $this->middleware('verified');
+
+        /** @see Authenticate */
+        $this->middleware('auth');
     }
 
     public function __invoke(): View

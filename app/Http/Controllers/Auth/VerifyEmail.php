@@ -19,11 +19,14 @@ class VerifyEmail extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'auth', /** @see Authenticate */
-            'signed', /** @see ValidateSignature */
-            'throttle:6,1', /** @see ThrottleRequests */
-        ]);
+        /** @see Authenticate */
+        $this->middleware('auth');
+
+        /** @see ValidateSignature */
+        $this->middleware('signed');
+
+        /** @see ThrottleRequests */
+        $this->middleware('throttle:6,1');
     }
 
     public function __invoke(EmailVerificationRequest $request): RedirectResponse

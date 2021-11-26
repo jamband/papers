@@ -22,9 +22,8 @@ class ResetPassword extends Controller
     {
         parent::__construct();
 
-        $this->middleware([
-            'guest', /** @see RedirectIfAuthenticated */
-        ]);
+        /** @see RedirectIfAuthenticated */
+        $this->middleware('guest');
     }
 
     public function view(Request $request): View
