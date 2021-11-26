@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\ArrayShape;
 
-/**
- * @noinspection PhpUnused
- */
 class UserFactory extends Factory
 {
-    /**
-     * @return array
-     */
-    public function definition(): array
+    #[ArrayShape([
+        'name' => "string",
+        'email' => "string",
+        'email_verified_at' => Carbon::class,
+        'password' => "string",
+        'remember_token' => "string"
+    ])] public function definition(): array
     {
         return [
             'name' => $this->faker->name(),
@@ -28,7 +30,6 @@ class UserFactory extends Factory
 
     /**
      * @noinspection PhpUnused
-     * @return Factory
      */
     public function unverified(): Factory
     {

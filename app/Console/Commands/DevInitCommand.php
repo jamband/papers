@@ -7,32 +7,18 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-/**
- * @noinspection PhpUnused
- */
 class DevInitCommand extends Command
 {
-    /** @var string */
     protected $signature = 'dev:init';
 
-    /** @var string */
     protected $description = 'Prepare the project for the development environment';
 
-    private Filesystem $file;
-
-    /**
-     * @param Filesystem $file
-     */
-    public function __construct(Filesystem $file)
-    {
+    public function __construct(
+        private Filesystem $file
+    ) {
         parent::__construct();
-
-        $this->file = $file;
     }
 
-    /**
-     * @return int
-     */
     public function handle(): int
     {
         $this->file->copy('.env.example', '.env');
@@ -58,9 +44,6 @@ class DevInitCommand extends Command
         return self::SUCCESS;
     }
 
-    /**
-     * @return void
-     */
     private function prepareEnvironmentFile(): void
     {
         $envFilename = $this->laravel->environmentFilePath();

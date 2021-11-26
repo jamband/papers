@@ -8,10 +8,6 @@ use Illuminate\Http\RedirectResponse;
 
 class DeletePaper extends Controller
 {
-    /**
-     * @param int $id
-     * @return RedirectResponse
-     */
     public function __invoke(int $id): RedirectResponse
     {
         $this->findModel($id)->delete();

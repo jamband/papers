@@ -12,18 +12,11 @@ use Illuminate\View\View;
 
 class CreatePaper extends Controller
 {
-    /**
-     * @return View
-     */
     public function view(): View
     {
         return view("papers.create");
     }
 
-    /**
-     * @param CreateRequest $request
-     * @return RedirectResponse
-     */
     public function create(CreateRequest $request): RedirectResponse
     {
         $data = $request->validated();

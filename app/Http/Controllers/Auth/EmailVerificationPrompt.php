@@ -22,11 +22,7 @@ class EmailVerificationPrompt extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse|View
-     */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): RedirectResponse|View
     {
         /** @var MustVerifyEmail $user */
         $user = $request->user();

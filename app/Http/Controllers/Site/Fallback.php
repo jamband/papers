@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class Fallback extends Controller
 {
-    /**
-     * @return Response
-     */
     public function __invoke(): Response
     {
         return Auth::guard('admin')->check()

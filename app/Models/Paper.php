@@ -26,20 +26,16 @@ class Paper extends Model
 
     /**
      * @noinspection PhpUnused
-     * @param mixed $value
-     * @return string
      */
-    public function getCreatedAtAttribute($value): string
+    public function getCreatedAtAttribute(mixed $value): string
     {
         return Carbon::parse($value)->format(self::CREATED_AT_FORMAT);
     }
 
     /**
      * @noinspection PhpUnused
-     * @param mixed $value
-     * @return string
      */
-    public function getUpdatedAtAttribute($value): string
+    public function getUpdatedAtAttribute(mixed $value): string
     {
         return Carbon::parse($value)->format(self::UPDATED_AT_FORMAT);
     }

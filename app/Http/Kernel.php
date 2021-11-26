@@ -30,7 +30,6 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class Kernel extends HttpKernel
 {
-    /** @var string[] */
     protected $middleware = [
         TrustHosts::class,
         TrustProxies::class,
@@ -40,7 +39,6 @@ class Kernel extends HttpKernel
         ConvertEmptyStringsToNull::class,
     ];
 
-     /** @var string[][] */
     protected $middlewareGroups = [
         'web' => [
             EncryptCookies::class,
@@ -53,7 +51,6 @@ class Kernel extends HttpKernel
         ],
     ];
 
-    /** @var string[] */
     protected $routeMiddleware = [
         'auth' => Authenticate::class,
         'auth.basic' => AuthenticateWithBasicAuth::class,

@@ -12,10 +12,6 @@ use Illuminate\View\View;
 
 class UpdatePaper extends Controller
 {
-    /**
-     * @param int $id
-     * @return View
-     */
     public function view(int $id): View
     {
         return view("papers.update", [
@@ -23,11 +19,6 @@ class UpdatePaper extends Controller
         ]);
     }
 
-    /**
-     * @param UpdateRequest $request
-     * @param int $id
-     * @return RedirectResponse
-     */
     public function update(UpdateRequest $request, int $id): RedirectResponse
     {
         $data = $request->validated();

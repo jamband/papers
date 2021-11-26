@@ -26,10 +26,6 @@ class VerifyEmail extends Controller
         ]);
     }
 
-    /**
-     * @param EmailVerificationRequest $request
-     * @return RedirectResponse
-     */
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         /** @var User $user */

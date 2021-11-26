@@ -22,17 +22,12 @@ class Login extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function view(): View
     {
         return view('admin.login');
     }
 
     /**
-     * @param LoginRequest $request
-     * @return RedirectResponse
      * @throws ValidationException
      */
     public function login(LoginRequest $request): RedirectResponse

@@ -23,10 +23,6 @@ class Controller extends BaseController
         ]);
     }
 
-    /**
-     * @param int $id
-     * @return Model
-     */
     protected function findModel(int $id): Model
     {
         /** @var Paper $query */

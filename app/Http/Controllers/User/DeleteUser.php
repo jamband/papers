@@ -20,10 +20,6 @@ class DeleteUser extends Controller
         ]);
     }
 
-    /**
-     * @param int $id
-     * @return RedirectResponse
-     */
     public function __invoke(int $id): RedirectResponse
     {
         /** @var User $user */

@@ -22,9 +22,6 @@ class GetUserProfile extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function __invoke(): View
     {
         $user = Auth::user();

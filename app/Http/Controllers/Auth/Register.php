@@ -25,18 +25,11 @@ class Register extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function view(): View
     {
         return view('auth.register');
     }
 
-    /**
-     * @param RegisterRequest $request
-     * @return RedirectResponse
-     */
     public function register(RegisterRequest $request): RedirectResponse
     {
         $data = $request->validated();

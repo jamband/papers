@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * @return void
-     */
     public function boot(): void
     {
         $this->routes(function () {
@@ -27,10 +24,6 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * @param string[] $groups
-     * @return void
-     */
     protected function createWebGroups(array $groups): void
     {
         foreach ($groups as $group) {

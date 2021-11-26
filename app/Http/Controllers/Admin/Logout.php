@@ -23,10 +23,6 @@ class Logout extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function __invoke(Request $request): RedirectResponse
     {
         Auth::guard('admin')->logout();

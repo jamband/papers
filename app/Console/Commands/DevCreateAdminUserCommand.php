@@ -8,23 +8,14 @@ use App\Models\AdminUser;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
-/**
- * @noinspection PhpUnused
- */
 class DevCreateAdminUserCommand extends Command
 {
-    /** @var string */
     private const ADMIN_EMAIL = 'admin@example.com';
 
-    /** @var string */
     protected $signature = 'dev:create-admin-user';
 
-    /** @var string */
     protected $description = 'Create an admin user';
 
-    /**
-     * @return int
-     */
     public function handle(): int
     {
         if ($this->userAlreadyExists()) {
@@ -45,9 +36,6 @@ class DevCreateAdminUserCommand extends Command
         return self::SUCCESS;
     }
 
-    /**
-     * @return bool
-     */
     private function userAlreadyExists(): bool
     {
         /** @var AdminUser $query */

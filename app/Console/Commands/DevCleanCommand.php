@@ -7,18 +7,12 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 
-/**
- * @noinspection PhpUnused
- */
 class DevCleanCommand extends Command
 {
-    /** @var string */
     protected $signature = 'dev:clean';
 
-    /** @var string */
     protected $description = 'Clean up development environment';
 
-    /** @var string[] */
     private const FILES = [
         // directories
         'node_modules',
@@ -36,9 +30,6 @@ class DevCleanCommand extends Command
         'public/mix-manifest.json'
     ];
 
-    /**
-     * @return int
-     */
     public function handle(): int
     {
         $this->call('optimize:clear');

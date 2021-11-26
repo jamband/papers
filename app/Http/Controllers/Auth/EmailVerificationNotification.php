@@ -23,10 +23,6 @@ class EmailVerificationNotification extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function __invoke(Request $request): RedirectResponse
     {
         /** @var MustVerifyEmail $user */

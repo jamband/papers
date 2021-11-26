@@ -22,18 +22,11 @@ class ForgotPassword extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function view(): View
     {
         return view('auth.forgot-password');
     }
 
-    /**
-     * @param ForgotPasswordRequest $request
-     * @return RedirectResponse
-     */
     public function forgotPassword(ForgotPasswordRequest $request): RedirectResponse
     {
         $data = $request->validated();

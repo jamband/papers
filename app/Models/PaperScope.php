@@ -13,9 +13,6 @@ trait PaperScope
 {
     /**
      * @noinspection PhpUnused
-     * @param Builder $query
-     * @param int $userId
-     * @return Builder
      */
     public function scopeByUserId(Builder $query, int $userId): Builder
     {

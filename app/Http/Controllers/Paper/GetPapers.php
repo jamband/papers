@@ -11,10 +11,6 @@ use Illuminate\View\View;
 
 class GetPapers extends Controller
 {
-    /**
-     * @param Request $request
-     * @return View
-     */
     public function __invoke(Request $request): View
     {
         /** @var Paper $query */

@@ -27,18 +27,11 @@ class DeleteAccount extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function view(): View
     {
         return view('auth.delete-account');
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function deleteAccount(Request $request): RedirectResponse
     {
         $id = Auth::id();

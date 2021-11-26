@@ -13,9 +13,6 @@ trait AdminUserScope
 {
     /**
      * @noinspection PhpUnused
-     * @param Builder $query
-     * @param string $email
-     * @return Builder
      */
     public function scopeByEmail(Builder $query, string $email): Builder
     {

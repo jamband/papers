@@ -20,9 +20,6 @@ class ManageUsers extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function __invoke(): View
     {
         $users = User::query()->latest()->get();

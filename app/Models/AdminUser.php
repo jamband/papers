@@ -26,13 +26,11 @@ class AdminUser extends Authenticatable implements MustVerifyEmail
     use HasFactory;
     use Notifiable;
 
-    /** @var string[] */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /** @var string[] */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];

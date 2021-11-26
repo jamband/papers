@@ -27,10 +27,6 @@ class ResetPassword extends Controller
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return View
-     */
     public function view(Request $request): View
     {
         return view('auth.reset-password', [
@@ -39,10 +35,6 @@ class ResetPassword extends Controller
         ]);
     }
 
-    /**
-     * @param ResetPasswordRequest $request
-     * @return RedirectResponse
-     */
     public function resetPassword(ResetPasswordRequest $request): RedirectResponse
     {
         $data = $request->validated();

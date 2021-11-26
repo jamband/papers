@@ -8,10 +8,6 @@ use Illuminate\View\View;
 
 class GetPaper extends Controller
 {
-    /**
-     * @param int $id
-     * @return View
-     */
     public function __invoke(int $id): View
     {
         return view('papers.view', [

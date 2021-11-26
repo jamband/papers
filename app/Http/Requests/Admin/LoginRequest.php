@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @property string|null $email
@@ -20,18 +21,15 @@ class LoginRequest extends FormRequest
 {
     private const MAX_ATTEMPTS = 3;
 
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * @return string[][]
-     */
-    public function rules(): array
+    #[ArrayShape([
+        'email' => "string[]",
+        'password' => "string[]"
+    ])] public function rules(): array
     {
         return [
             'email' => [
@@ -47,7 +45,6 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * @return void
      * @throws ValidationException
      */
     public function authenticate(): void
@@ -69,7 +66,6 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * @return void
      * @throws ValidationException
      */
     private function ensureIsNotRateLimited(): void
@@ -90,9 +86,6 @@ class LoginRequest extends FormRequest
         }
     }
 
-    /**
-     * @return string
-     */
     private function throttleKey(): string
     {
         return Str::lower($this->input('email')).'|'.$this->ip();

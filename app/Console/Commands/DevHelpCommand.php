@@ -6,20 +6,12 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-/**
- * @noinspection PhpUnused
- */
 class DevHelpCommand extends Command
 {
-    /** @var string */
     protected $signature = 'dev:help';
 
-    /** @var string */
     protected $description = 'Help for the development environment';
 
-    /**
-     * @return int
-     */
     public function handle(): int
     {
         $this->table(['Requirements'], [

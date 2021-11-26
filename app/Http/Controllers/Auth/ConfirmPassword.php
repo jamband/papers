@@ -24,17 +24,12 @@ class ConfirmPassword extends Controller
         ]);
     }
 
-    /**
-     * @return View
-     */
     public function view(): View
     {
         return view('auth.confirm-password');
     }
 
     /**
-     * @param Request $request
-     * @return RedirectResponse
      * @throws ValidationException
      */
     public function confirmPassword(Request $request): RedirectResponse
