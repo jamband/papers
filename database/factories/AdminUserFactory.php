@@ -5,19 +5,11 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\ArrayShape;
 
 class AdminUserFactory extends Factory
 {
-    #[ArrayShape([
-        'name' => "string",
-        'email' => "string",
-        'email_verified_at' => Carbon::class,
-        'password' => "string",
-        'remember_token' => "string"
-    ])] public function definition(): array
+    public function definition(): array
     {
         return [
             'name' => 'admin',

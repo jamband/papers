@@ -6,7 +6,6 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
-use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @property string|null $token
@@ -15,22 +14,12 @@ use JetBrains\PhpStorm\ArrayShape;
  */
 class ResetPasswordRequest extends FormRequest
 {
-    /**
-     * @return bool
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * @return array
-     */
-    #[ArrayShape([
-        'token' => "string[]",
-        'email' => "string[]",
-        'password' => "array"
-    ])] public function rules(): array
+    public function rules(): array
     {
         return [
             'token' => [
