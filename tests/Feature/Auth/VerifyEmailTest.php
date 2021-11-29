@@ -29,8 +29,8 @@ class VerifyEmailTest extends TestCase
 
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
-            now()->addMinutes(),
-            ['id' => $user->id, 'hash' => sha1('wrong_email')]
+            now()->subMinute(), // expires
+            ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
         $this->actingAs($user)
