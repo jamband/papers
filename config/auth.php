@@ -45,5 +45,9 @@ return [
     'name_max_length' => 32,
     'password_min_length' => 8,
     'password_max_length' => 64,
+//    'verification' => [
+//        'expire' => 60,
+//    ],
     'password_timeout' => 10800,
+
 ];
