@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Encryption\Encrypter;
 use Illuminate\Filesystem\Filesystem;
 
 class DevInitCommand extends Command
@@ -50,12 +51,21 @@ class DevInitCommand extends Command
 
         // .env
         $source = file_get_contents($envFilename);
-        $data = preg_replace('/__database__/', base_path().'/database/app.db', $source);
+        $data = preg_replace('/__app_key__/', $this->generateAppKey(), $source);
+        $data = preg_replace('/__database__/', base_path().'/database/app.db', $data);
         file_put_contents($envFilename, $data);
 
         // .env.dusk.local
         $source = file_get_contents($envFilename.'.dusk.local');
-        $data = preg_replace('/__database__/', base_path().'/storage/framework/testing/app.db', $source);
+        $data = preg_replace('/__app_key__/', $this->generateAppKey(), $source);
+        $data = preg_replace('/__database__/', base_path().'/storage/framework/testing/app.db', $data);
         file_put_contents($envFilename.'.dusk.local', $data);
+    }
+
+    private function generateAppKey(): string
+    {
+        return 'base64:'.base64_encode(
+            Encrypter::generateKey($this->laravel['config']['app.cipher'])
+        );
     }
 }
