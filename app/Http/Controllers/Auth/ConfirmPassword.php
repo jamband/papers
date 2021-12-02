@@ -9,6 +9,7 @@ use App\Http\Middleware\Authenticate;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -21,6 +22,9 @@ class ConfirmPassword extends Controller
 
         /** @see Authenticate */
         $this->middleware('auth');
+
+        /** @see ThrottleRequests */
+        $this->middleware('throttle:6,1');
     }
 
     public function view(): View

@@ -22,6 +22,16 @@ class ConfirmPasswordTest extends TestCase
             ->assertRedirect(route('auth.login'));
     }
 
+    public function testThrottleMiddleware(): void
+    {
+        /** @var User $user */
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->post(route('password.confirm'))
+            ->assertHeader('X-RATELIMIT-REMAINING', 5);
+    }
+
     public function testView(): void
     {
         /** @var User $user */
