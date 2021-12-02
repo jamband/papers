@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Browser\Auth;
 
 use App\Models\User;
+use Illuminate\Cache\RateLimiter;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\URL;
 use Laravel\Dusk\Browser;
@@ -24,6 +25,8 @@ class VerifyEmailTest extends DuskTestCase
         $user = User::factory()->create([
             'email_verified_at' => null,
         ]);
+
+        $this->clearRateLimiter($user->id);
 
         $this->browse(function (Browser $browser) use ($user) {
             $verificationUrl = URL::temporarySignedRoute(
@@ -50,6 +53,8 @@ class VerifyEmailTest extends DuskTestCase
             'email_verified_at' => null,
         ]);
 
+        $this->clearRateLimiter($user->id);
+
         $this->browse(function (Browser $browser) use ($user) {
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
@@ -75,6 +80,8 @@ class VerifyEmailTest extends DuskTestCase
             'email_verified_at' => null,
         ]);
 
+        $this->clearRateLimiter($user->id);
+
         $this->browse(function (Browser $browser) use ($user) {
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
@@ -88,5 +95,10 @@ class VerifyEmailTest extends DuskTestCase
                 ->assertSee(__('verification.verified'))
             ;
         });
+    }
+
+    private function clearRateLimiter(int $id): void
+    {
+        app(RateLimiter::class)->clear(sha1((string)$id));
     }
 }
