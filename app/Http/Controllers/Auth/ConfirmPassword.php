@@ -45,7 +45,7 @@ class ConfirmPassword extends Controller
             ]);
         }
 
-        $request->session()->put('auth.password_confirmed_at', time());
+        $request->session()->passwordConfirmed();
 
         return redirect()->intended();
     }
