@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class DevInitCommand extends Command
 {
@@ -15,11 +17,15 @@ class DevInitCommand extends Command
     protected $description = 'Prepare the project for the development environment';
 
     public function __construct(
-        private Filesystem $file
+        private Filesystem $file,
+        private Repository $config,
     ) {
         parent::__construct();
     }
 
+    /**
+     * @throws FileNotFoundException
+     */
     public function handle(): int
     {
         $this->file->copy('.env.example', '.env');
@@ -45,27 +51,30 @@ class DevInitCommand extends Command
         return self::SUCCESS;
     }
 
+    /**
+     * @throws FileNotFoundException
+     */
     private function prepareEnvironmentFile(): void
     {
         $envFilename = $this->laravel->environmentFilePath();
 
         // .env
-        $source = file_get_contents($envFilename);
-        $data = preg_replace('/__app_key__/', $this->generateAppKey(), $source);
-        $data = preg_replace('/__database__/', base_path().'/database/app.db', $data);
-        file_put_contents($envFilename, $data);
+        $data = $this->file->get($envFilename);
+        $data = preg_replace('/__app_key__/', $this->generateAppKey(), $data);
+        $data = preg_replace('/__database__/', database_path('app.db'), $data);
+        $this->file->put($envFilename, $data);
 
         // .env.dusk.local
-        $source = file_get_contents($envFilename.'.dusk.local');
-        $data = preg_replace('/__app_key__/', $this->generateAppKey(), $source);
-        $data = preg_replace('/__database__/', base_path().'/storage/framework/testing/app.db', $data);
-        file_put_contents($envFilename.'.dusk.local', $data);
+        $data = $this->file->get($envFilename.'.dusk.local');
+        $data = preg_replace('/__app_key__/', $this->generateAppKey(), $data);
+        $data = preg_replace('/__database__/', storage_path('framework/testing/app.db'), $data);
+        $this->file->put($envFilename.'.dusk.local', $data);
     }
 
     private function generateAppKey(): string
     {
         return 'base64:'.base64_encode(
-            Encrypter::generateKey($this->laravel['config']['app.cipher'])
+            Encrypter::generateKey($this->config->get('app.cipher'))
         );
     }
 }
