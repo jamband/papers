@@ -33,7 +33,7 @@ class ResetPasswordTest extends DuskTestCase
                 ->assertSeeIn('h1', 'Reset password')
                 ->assertInputValue('email', $user->email)
 
-                ->type('email', '')
+                ->clear('email')
                 ->press('Reset Password')
                 ->assertSee(__('validation.required', ['attribute' => 'email']))
                 ->assertSee(__('validation.required', ['attribute' => 'password']))

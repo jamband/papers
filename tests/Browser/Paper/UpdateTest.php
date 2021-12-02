@@ -43,8 +43,8 @@ class UpdateTest extends DuskTestCase
                 ->assertInputValue('title', $paper->title)
                 ->assertInputValue('body', $paper->body)
 
-                ->type('title', '')
-                ->type('body', '')
+                ->clear('title')
+                ->clear('body')
                 ->press('@update-paper-button')
                 ->assertSee(__('validation.required', ['attribute' => 'title']))
                 ->assertSee(__('validation.required', ['attribute' => 'body']))
