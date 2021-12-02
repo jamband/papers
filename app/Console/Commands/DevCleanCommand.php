@@ -32,6 +32,7 @@ class DevCleanCommand extends Command
 
     public function handle(): int
     {
+        $this->call('dusk:purge');
         $this->call('optimize:clear');
 
         $command = 'rm -rf '.implode(' ', self::FILES);
