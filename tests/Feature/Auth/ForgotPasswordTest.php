@@ -9,7 +9,6 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ForgotPasswordTest extends TestCase
@@ -30,7 +29,7 @@ class ForgotPasswordTest extends TestCase
     public function testView(): void
     {
         $this->get(route('password.forgot'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testForgotPasswordFails(): void

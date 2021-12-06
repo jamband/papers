@@ -6,7 +6,6 @@ namespace Tests\Feature\Admin;
 
 use App\Models\AdminUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class HomeTest extends TestCase
@@ -38,6 +37,6 @@ class HomeTest extends TestCase
 
         $this->actingAs($adminUser, 'admin')
             ->get(route('admin.home'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 }

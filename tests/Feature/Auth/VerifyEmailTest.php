@@ -7,7 +7,6 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class VerifyEmailTest extends TestCase
@@ -35,7 +34,7 @@ class VerifyEmailTest extends TestCase
 
         $this->actingAs($user)
             ->get($verificationUrl)
-            ->assertStatus(Response::HTTP_FORBIDDEN);
+            ->assertForbidden();
 
         $this->assertFalse($user->fresh()->hasVerifiedEmail());
     }

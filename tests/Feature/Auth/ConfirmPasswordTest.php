@@ -6,7 +6,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ConfirmPasswordTest extends TestCase
@@ -39,7 +38,7 @@ class ConfirmPasswordTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('password.confirm'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testConfirmPasswordFails(): void

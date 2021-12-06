@@ -7,7 +7,6 @@ namespace Tests\Feature\User;
 use App\Models\AdminUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ManageUsersTest extends TestCase
@@ -34,6 +33,6 @@ class ManageUsersTest extends TestCase
 
         $this->actingAs($adminUser, 'admin')
             ->get(route('user.admin'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 }

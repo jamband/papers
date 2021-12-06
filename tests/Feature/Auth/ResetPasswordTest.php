@@ -10,7 +10,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ResetPasswordTest extends TestCase
@@ -31,7 +30,7 @@ class ResetPasswordTest extends TestCase
     public function testView(): void
     {
         $this->get('/reset-password/xxx?'.$this->faker->email)
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testResetPasswordFails(): void

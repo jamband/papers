@@ -7,7 +7,6 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class DeleteAccountTest extends TestCase
@@ -50,7 +49,7 @@ class DeleteAccountTest extends TestCase
         $this->actingAs($user)
             ->withoutMiddleware([RequirePassword::class])
             ->get(route('auth.delete'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testDeleteAccount(): void

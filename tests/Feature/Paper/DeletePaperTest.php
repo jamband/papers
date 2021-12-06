@@ -7,7 +7,6 @@ namespace Tests\Feature\Paper;
 use App\Models\Paper;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class DeletePaperTest extends TestCase
@@ -39,7 +38,7 @@ class DeletePaperTest extends TestCase
 
         $this->actingAs($user)
             ->post(route('paper.delete', ['id' => 1]))
-            ->assertStatus(Response::HTTP_NOT_FOUND);
+            ->assertNotFound();
     }
 
     public function testDeletePaperFails(): void
@@ -55,7 +54,7 @@ class DeletePaperTest extends TestCase
         // It fails because the user who created the paper is different.
         $this->actingAs($users[1])
             ->post(route('paper.delete', [$paper]))
-            ->assertStatus(Response::HTTP_NOT_FOUND);
+            ->assertNotFound();
     }
 
     public function testDeletePaper(): void

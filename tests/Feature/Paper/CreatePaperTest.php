@@ -7,7 +7,6 @@ namespace Tests\Feature\Paper;
 use App\Models\Paper;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class CreatePaperTest extends TestCase
@@ -39,7 +38,7 @@ class CreatePaperTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('paper.create'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testCreatePaper(): void

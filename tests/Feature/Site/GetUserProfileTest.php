@@ -6,7 +6,6 @@ namespace Tests\Feature\Site;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class GetUserProfileTest extends TestCase
@@ -38,6 +37,6 @@ class GetUserProfileTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('profile'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 }

@@ -7,7 +7,6 @@ namespace Tests\Feature\Paper;
 use App\Models\Paper;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class GetPaperTest extends TestCase
@@ -39,7 +38,7 @@ class GetPaperTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('paper.view', ['id' => 1]))
-            ->assertStatus(Response::HTTP_NOT_FOUND);
+            ->assertNotFound();
     }
 
     public function testViewFails(): void
@@ -55,7 +54,7 @@ class GetPaperTest extends TestCase
         // It fails because the user who created the paper is different.
         $this->actingAs($users[1])
             ->get(route('paper.view', [$paper]))
-            ->assertStatus(Response::HTTP_NOT_FOUND);
+            ->assertNotFound();
     }
 
     public function testView(): void
@@ -68,6 +67,6 @@ class GetPaperTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('paper.view', [$paper]))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 }

@@ -6,7 +6,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class EmailVerificationPromptTest extends TestCase
@@ -38,6 +37,6 @@ class EmailVerificationPromptTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('verification.notice'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 }

@@ -9,7 +9,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -34,7 +33,7 @@ class RegisterTest extends TestCase
     public function testView(): void
     {
         $this->get(route('auth.register'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testRegister(): void

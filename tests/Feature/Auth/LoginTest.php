@@ -6,7 +6,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -30,7 +29,7 @@ class LoginTest extends TestCase
     public function testView(): void
     {
         $this->get(route('auth.login'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testLoginFails(): void

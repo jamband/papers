@@ -6,7 +6,6 @@ namespace Tests\Feature\Paper;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class GetPapersTest extends TestCase
@@ -38,6 +37,6 @@ class GetPapersTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('paper.home'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 }

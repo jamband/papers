@@ -6,7 +6,6 @@ namespace Tests\Feature\Admin;
 
 use App\Models\AdminUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -26,7 +25,7 @@ class LoginTest extends TestCase
     public function testView(): void
     {
         $this->get(route('admin.login'))
-            ->assertStatus(Response::HTTP_OK);
+            ->assertOk();
     }
 
     public function testLoginFails(): void
