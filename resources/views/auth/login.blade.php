@@ -19,13 +19,13 @@
         <span class="ml-1 text-sm">Remember me</span>
       </label>
     </div>
-    <button type="submit">Login</button>
+    <x-button>Login</x-button>
     <span class="mx-1">or</span>
     <a href="{{ route('password.forgot') }}">Forgot password?</a>
   </form>
   <hr class="my-10" />
   <a href="{{ route('admin.login') }}">Login as administrator</a>
-  <div class="mt-2 text-sm text-yellow-500">
+  <div class="mt-2 text-sm text-amber-500">
     <x-icon.light-bulb class="w-5 h-5" />
     This link usually does not exist.
     Displayed for development environment.

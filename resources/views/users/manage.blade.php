@@ -9,9 +9,9 @@
     <div class="mb-2">Updated at: {{ $user->updated_at->format('F jS Y, g:i a') }}</div>
     <form action="{{ route('user.delete', [$user]) }}" method="POST">
       @csrf
-      <button type="submit" onclick="return confirm('Are you sure you want to delete it?');" dusk="delete-user-button">
+      <x-button onclick="return confirm('Are you sure you want to delete it?');" dusk="delete-user-button">
         Delete
-      </button>
+      </x-button>
     </form>
     <hr class="mt-3 mb-10" />
   @endforeach

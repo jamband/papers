@@ -12,6 +12,6 @@
       <input id="password" type="password" name="password" />
       <x-form.error name="password" />
     </div>
-    <button type="submit">Confirm</button>
+    <x-button>Confirm</x-button>
   </form>
 </x-layout.main>

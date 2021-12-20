@@ -12,7 +12,7 @@
     @auth
       <form action="{{ route('auth.logout') }}" method="POST">
         @csrf
-        <x-button.link type="submit" class="px-5 py-2" dusk="logout-button">
+        <x-button.link class="px-5 py-2" dusk="logout-button">
           Logout
         </x-button.link>
       </form>

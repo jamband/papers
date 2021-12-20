@@ -21,7 +21,7 @@
       <label for="password_confirmation">Confirm Password</label>
       <input type="password" id="password_confirmation" name="password_confirmation">
     </div>
-    <button type="submit">Register</button>
+    <x-button>Register</x-button>
   </form>
   <hr class="my-10" />
   <x-icon.light-bulb class="w-5 h-5" />

@@ -6,10 +6,10 @@
   </p>
   <form action="{{ route('auth.delete') }}" method="POST">
     @csrf
-    <button type="submit" class="bg-red-600" onclick="return confirm('Are you sure you want to delete it?');">
+    <x-button bg="bg-red-600" onclick="return confirm('Are you sure you want to delete it?');">
       <x-icon.exclamation class="w-5 h-5" />
       Delete account
-    </button>
+    </x-button>
     <span class="mx-1">or</span>
     <a href="{{ route('home') }}">Cancel</a>
   </form>

@@ -1,10 +1,8 @@
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
     "./resources/views/**/*.blade.php",
     "./storage/framework/views/*.php",
   ],
-  darkMode: false,
   theme: {
     container: {
       padding: "1rem",

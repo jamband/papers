@@ -12,9 +12,7 @@
       <textarea name="body" id="body">{{ old('body', $paper->body) }}</textarea>
       <x-form.error name="body" />
     </div>
-    <button type="submit" dusk="update-paper-button">
-      Update
-    </button>
+    <x-button dusk="update-paper-button">Update</x-button>
   </form>
   <div class="mt-10 md:mt-20 text-center">
     <a href="{{ route('paper.home') }}">Back to Papers</a>

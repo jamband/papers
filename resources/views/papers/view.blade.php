@@ -6,7 +6,7 @@
   <a href="{{ route('paper.update', [$paper]) }}" class="mr-2">Update</a>
   <form action="{{ route('paper.delete', [$paper]) }}" method="POST" class="inline">
     @csrf
-    <x-button.link type="submit" onclick="return confirm('Are you sure?');">
+    <x-button.link onclick="return confirm('Are you sure?');">
       Delete
     </x-button.link>
   </form>

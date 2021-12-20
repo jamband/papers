@@ -21,12 +21,12 @@
         <span class="ml-1 text-sm">Remember me</span>
       </label>
     </div>
-    <button type="submit">Login</button>
+    <x-button>Login</x-button>
     <span class="ml-1">as administrator</span>
   </form>
   <hr class="my-10" />
   <a href="{{ route('auth.login') }}">Login as regular user</a>
-  <div class="mt-2 text-sm text-yellow-500">
+  <div class="mt-2 text-sm text-amber-500">
     <x-icon.light-bulb class="w-5 h-5" />
     This is a login link for regular users.
   </div>

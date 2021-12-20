@@ -13,6 +13,6 @@
       <input type="text" id="email" name="email" value="{{ old('email') }}">
       <x-form.error name="email" />
     </div>
-    <button type="submit">Send Email</button>
+    <x-button>Send Email</x-button>
   </form>
 </x-layout.main>

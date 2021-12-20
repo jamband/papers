@@ -17,6 +17,6 @@
       <label for="password_confirmation">Confirm Password</label>
       <input type="password" id="password_confirmation" name="password_confirmation">
     </div>
-    <button type="submit">Reset Password</button>
+    <x-button>Reset Password</x-button>
   </form>
 </x-layout.main>

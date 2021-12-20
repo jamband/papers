@@ -1,9 +1,7 @@
-@import "tailwindcss/base";
-
 @layer base {
   html,
   body {
-    @apply text-gray-700 text-base;
+    @apply text-gray-600 text-base;
   }
 
   h1 {
@@ -15,10 +13,7 @@
   }
 
   a {
-    @apply underline;
-
-    text-decoration-thickness: 0.05em;
-    text-underline-offset: 0.25em;
+    @apply underline decoration-[0.05em] underline-offset-[0.25em];
   }
 
   p {
@@ -39,10 +34,6 @@
 
   label {
     @apply block;
-  }
-
-  button {
-    @apply px-3 py-1 bg-gray-600 text-gray-200 rounded;
   }
 
   svg {
