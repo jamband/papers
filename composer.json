@@ -1,7 +1,7 @@
 {
   "require": {
     "php": "^8.0",
-    "laravel/framework": "^8.74"
+    "laravel/framework": "^8.76"
   },
   "require-dev": {
     "brianium/paratest": "^6.4",
