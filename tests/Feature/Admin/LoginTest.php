@@ -19,7 +19,7 @@ class LoginTest extends TestCase
         /** @var AdminUser $adminUser */
         $adminUser = AdminUser::factory()->create();
 
-        $this->actingAs($adminUser)
+        $this->actingAs($adminUser, 'admin')
             ->get(route('admin.login'))
             ->assertRedirect(route('home'));
     }
