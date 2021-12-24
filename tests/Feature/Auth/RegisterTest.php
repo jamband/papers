@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\Register;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
+/** @see Register */
 class RegisterTest extends TestCase
 {
     use RefreshDatabase;

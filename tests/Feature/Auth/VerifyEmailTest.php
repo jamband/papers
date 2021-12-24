@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\VerifyEmail;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
+/** @see VerifyEmail */
 class VerifyEmailTest extends TestCase
 {
     use RefreshDatabase;

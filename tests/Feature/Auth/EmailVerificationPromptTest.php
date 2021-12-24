@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\EmailVerificationPrompt;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see EmailVerificationPrompt */
 class EmailVerificationPromptTest extends TestCase
 {
     use RefreshDatabase;

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Site;
 
+use App\Http\Controllers\Site\GetUserProfile;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see GetUserProfile */
 class GetUserProfileTest extends TestCase
 {
     use RefreshDatabase;

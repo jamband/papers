@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\ConfirmPassword;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see ConfirmPassword */
 class ConfirmPasswordTest extends TestCase
 {
     use RefreshDatabase;

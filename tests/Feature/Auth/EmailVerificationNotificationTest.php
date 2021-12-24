@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\EmailVerificationNotification;
 use App\Models\User;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
+/** @see EmailVerificationNotification */
 class EmailVerificationNotificationTest extends TestCase
 {
     use RefreshDatabase;

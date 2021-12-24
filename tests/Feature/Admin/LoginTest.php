@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Admin;
 
+use App\Http\Controllers\Admin\Login;
 use App\Models\AdminUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see Login */
 class LoginTest extends TestCase
 {
     use RefreshDatabase;

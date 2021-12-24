@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Paper;
 
+use App\Http\Controllers\Paper\CreatePaper;
 use App\Models\Paper;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see CreatePaper */
 class CreatePaperTest extends TestCase
 {
     use RefreshDatabase;

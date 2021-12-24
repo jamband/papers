@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\User;
 
+use App\Http\Controllers\User\ManageUsers;
 use App\Models\AdminUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see ManageUsers */
 class ManageUsersTest extends TestCase
 {
     use RefreshDatabase;

@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\DeleteAccount;
 use App\Models\User;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see DeleteAccount */
 class DeleteAccountTest extends TestCase
 {
     use RefreshDatabase;

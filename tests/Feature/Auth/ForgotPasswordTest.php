@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Auth;
 
+use App\Http\Controllers\Auth\ForgotPassword;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -11,6 +12,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
+/** @see ForgotPassword */
 class ForgotPasswordTest extends TestCase
 {
     use RefreshDatabase;

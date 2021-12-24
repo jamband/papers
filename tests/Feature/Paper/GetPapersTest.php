@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Paper;
 
+use App\Http\Controllers\Paper\GetPapers;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see GetPapers */
 class GetPapersTest extends TestCase
 {
     use RefreshDatabase;

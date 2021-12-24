@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
+/** @see \App\Http\Controllers\Auth\ResetPassword */
 class ResetPasswordTest extends TestCase
 {
     use RefreshDatabase;

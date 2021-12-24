@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\User;
 
+use App\Http\Controllers\User\DeleteUser;
 use App\Models\AdminUser;
 use App\Models\Paper;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see DeleteUser */
 class DeleteUserTest extends TestCase
 {
     use RefreshDatabase;
