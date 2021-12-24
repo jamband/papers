@@ -15,7 +15,6 @@ class RouteServiceProvider extends ServiceProvider
             $this->createWebGroups([
                 'admin',
                 'auth',
-                'users',
                 'papers',
 
                 // site has fallback

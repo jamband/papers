@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Browser\User;
+namespace Tests\Browser\Admin;
 
 use App\Models\AdminUser;
 use App\Models\User;
@@ -11,7 +11,7 @@ use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 use Throwable;
 
-class ManageUsersTest extends DuskTestCase
+class GetUsersTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -21,7 +21,7 @@ class ManageUsersTest extends DuskTestCase
     public function testManageUsers(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visitRoute('user.admin')
+            $browser->visitRoute('admin.users')
                 ->assertRouteIs('admin.login')
             ;
         });
@@ -37,7 +37,7 @@ class ManageUsersTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($adminUser, $user) {
             $browser->loginAs($adminUser, 'admin')
-                ->visitRoute('user.admin')
+                ->visitRoute('admin.users')
                 ->assertSeeIn('h1', 'Manage Users')
                 ->assertSee('Currently logged in as an administrator')
 

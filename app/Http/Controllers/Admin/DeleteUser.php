@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Authenticate;
@@ -26,7 +26,7 @@ class DeleteUser extends Controller
 
         $user->delete();
 
-        return redirect()->route('user.admin')
+        return redirect()->route('admin.users')
             ->with('status', $user->name.' has been deleted.');
     }
 }

@@ -7,7 +7,7 @@
     <div>Email: {{ $user->email }}</div>
     <div>Created at: {{ $user->created_at->format('F jS Y, g:i a') }}</div>
     <div class="mb-2">Updated at: {{ $user->updated_at->format('F jS Y, g:i a') }}</div>
-    <form action="{{ route('user.delete', [$user]) }}" method="POST">
+    <form action="{{ route('admin.user.delete', [$user]) }}" method="POST">
       @csrf
       <x-button onclick="return confirm('Are you sure you want to delete it?');" dusk="delete-user-button">
         Delete

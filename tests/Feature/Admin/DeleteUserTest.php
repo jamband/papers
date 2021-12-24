@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\User;
+namespace Tests\Feature\Admin;
 
-use App\Http\Controllers\User\DeleteUser;
+use App\Http\Controllers\Admin\DeleteUser;
 use App\Models\AdminUser;
 use App\Models\Paper;
 use App\Models\User;
@@ -18,15 +18,15 @@ class DeleteUserTest extends TestCase
 
     public function testAuthAdminMiddleware(): void
     {
-        $this->post(route('user.delete', ['id' => 1]))
-            ->assertRedirect(route('auth.login'));
+        $this->post(route('admin.user.delete', ['id' => 1]))
+            ->assertRedirect(route('admin.login'));
 
         /** @var User $user */
         $user = User::factory()->create();
 
         $this->actingAs($user)
-            ->post(route('user.delete', ['id' => 1]))
-            ->assertRedirect(route('auth.login'));
+            ->post(route('admin.user.delete', ['id' => 1]))
+            ->assertRedirect(route('admin.login'));
     }
 
     public function testDeleteUser(): void
@@ -45,8 +45,8 @@ class DeleteUserTest extends TestCase
         $this->assertDatabaseCount(Paper::class, 1);
 
         $this->actingAs($adminUser, 'admin')
-            ->post(route('user.delete', [$user]))
-            ->assertRedirect(route('user.admin'));
+            ->post(route('admin.user.delete', [$user]))
+            ->assertRedirect(route('admin.users'));
 
         $this->assertDatabaseCount(User::class, 0);
         $this->assertDatabaseCount(Paper::class, 0);

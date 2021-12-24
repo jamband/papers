@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Browser\User;
+namespace Tests\Browser\Admin;
 
 use App\Models\AdminUser;
 use App\Models\Paper;
@@ -36,10 +36,10 @@ class DeleteUserTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($adminUser, $user) {
             $browser->loginAs($adminUser, 'admin')
-                ->visitRoute('user.admin')
+                ->visitRoute('admin.users')
                 ->press('@delete-user-button')
                 ->acceptDialog()
-                ->assertRouteIs('user.admin')
+                ->assertRouteIs('admin.users')
                 ->assertSee($user->name.' has been deleted.')
                 ->assertDontSee('Name: '.$user->name)
                 ->assertDontSee('Email: '.$user->email)

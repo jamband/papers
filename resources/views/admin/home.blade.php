@@ -2,7 +2,7 @@
   <h1>Admin Home</h1>
   <x-auth.session-status :status="session('status')" class="mb-5" />
   <div class="flex items-center justify-center">
-    <a href="{{ route('user.admin') }}" class="px-5 py-2">Users</a>
+    <a href="{{ route('admin.users') }}" class="px-5 py-2">Users</a>
   </div>
   <hr class="my-10" />
   <div class="mt-20 flex items-center justify-center">

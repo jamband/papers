@@ -33,7 +33,7 @@ class HomeTest extends DuskTestCase
                 ->assertSeeIn('h1', 'Admin Home')
 
                 ->clickLink('Users')
-                ->assertRouteIs('user.admin')
+                ->assertRouteIs('admin.users')
                 ->back()
 
                 ->press('Logout')

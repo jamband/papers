@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature\User;
+namespace Tests\Feature\Admin;
 
-use App\Http\Controllers\User\ManageUsers;
+use App\Http\Controllers\Admin\GetUsers;
 use App\Models\AdminUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-/** @see ManageUsers */
-class ManageUsersTest extends TestCase
+/** @see GetUsers */
+class GetUsersTest extends TestCase
 {
     use RefreshDatabase;
 
     public function testAuthAdminMiddleware(): void
     {
-        $this->get(route('user.admin'))
+        $this->get(route('admin.users'))
             ->assertRedirect(route('admin.login'));
 
         /** @var User $user */
         $user = User::factory()->create();
 
         $this->actingAs($user)
-            ->get(route('user.admin'))
+            ->get(route('admin.users'))
             ->assertRedirect(route('admin.login'));
     }
 
@@ -34,7 +34,7 @@ class ManageUsersTest extends TestCase
         $adminUser = AdminUser::factory()->create();
 
         $this->actingAs($adminUser, 'admin')
-            ->get(route('user.admin'))
+            ->get(route('admin.users'))
             ->assertOk();
     }
 }

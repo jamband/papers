@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Authenticate;
 use App\Models\User;
 use Illuminate\View\View;
 
-class ManageUsers extends Controller
+class GetUsers extends Controller
 {
     public function __construct()
     {
@@ -23,7 +23,7 @@ class ManageUsers extends Controller
     {
         $users = User::query()->latest()->get();
 
-        return view('users.manage', [
+        return view('admin.users', [
             'users' => $users,
         ]);
     }
