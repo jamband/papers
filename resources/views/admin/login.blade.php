@@ -26,8 +26,10 @@
   </form>
   <hr class="my-10" />
   <a href="{{ route('auth.login') }}">Login as regular user</a>
-  <div class="mt-2 text-sm text-amber-500">
-    <x-icon.light-bulb class="w-5 h-5" />
+  <div class="mt-2 flex items-center text-sm text-amber-500">
+    <div class="mr-1">
+      <x-icon.light-bulb class="w-5 h-5" />
+    </div>
     This is a login link for regular users.
   </div>
 </x-layout.admin.main>

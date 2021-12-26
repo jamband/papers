@@ -1,13 +1,15 @@
 <x-layout.main title="Delete your account">
   <h1>Delete your account</h1>
-  <p class="text-red-600">
-    <x-icon.exclamation class="w-5 h-5" />
+  <div class="mb-3 flex items-center text-red-600">
+    <div class="mr-1">
+      <x-icon.exclamation class="w-5 h-5" />
+    </div>
     When the account is deleted, the related data will also be deleted.
-  </p>
+  </div>
   <form action="{{ route('auth.delete') }}" method="POST">
     @csrf
-    <x-button bg="bg-red-600" onclick="return confirm('Are you sure you want to delete it?');">
-      <x-icon.exclamation class="w-5 h-5" />
+    <x-button bg="bg-red-600" class="inline-flex items-center" onclick="return confirm('Are you sure you want to delete it?');">
+      <span class="mr-1"><x-icon.exclamation class="w-5 h-5" /></span>
       Delete account
     </x-button>
     <span class="mx-1">or</span>

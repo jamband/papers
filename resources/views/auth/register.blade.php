@@ -24,7 +24,13 @@
     <x-button>Register</x-button>
   </form>
   <hr class="my-10" />
-  <x-icon.light-bulb class="w-5 h-5" />
-  If you have already registered as a user, please
-  <a href="{{ route('auth.login') }}">Login from this link</a>.
+  <div class="flex items-center">
+    <div class="mr-1">
+      <x-icon.light-bulb class="w-5 h-5" />
+    </div>
+    <div>
+      If you have already registered as a user, please
+      <a href="{{ route('auth.login') }}">Login from this link</a>.
+    </div>
+  </div>
 </x-layout.main>

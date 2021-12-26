@@ -25,8 +25,10 @@
   </form>
   <hr class="my-10" />
   <a href="{{ route('admin.login') }}">Login as administrator</a>
-  <div class="mt-2 text-sm text-amber-500">
-    <x-icon.light-bulb class="w-5 h-5" />
+  <div class="mt-2 flex items-center text-sm text-amber-500">
+    <div class="mr-1">
+      <x-icon.light-bulb class="w-5 h-5" />
+    </div>
     This link usually does not exist.
     Displayed for development environment.
   </div>

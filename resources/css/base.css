@@ -1,3 +1,5 @@
+@import "tailwindcss/base";
+
 @layer base {
   html,
   body {
@@ -34,9 +36,5 @@
 
   label {
     @apply block;
-  }
-
-  svg {
-    @apply relative bottom-0.5 inline;
   }
 }
