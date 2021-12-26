@@ -32,6 +32,6 @@ class Logout extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home')
-            ->with('status', 'Logged out.');
+            ->with('status', 'Logged out successfully.');
     }
 }

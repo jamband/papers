@@ -41,7 +41,7 @@ class LoginTest extends DuskTestCase
                 ->type('password', str_repeat($adminUser->name, 2))
                 ->press('Login')
                 ->assertRouteIs('admin.home')
-                ->assertSee('Logged in.')
+                ->assertSee('Logged in successfully.')
             ;
         });
     }

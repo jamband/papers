@@ -35,6 +35,6 @@ class Login extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('admin.home')
-            ->with('status', 'Logged in.');
+            ->with('status', 'Logged in successfully.');
     }
 }
