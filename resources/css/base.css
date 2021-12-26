@@ -28,10 +28,12 @@
 
   input[type="email"],
   input[type="password"],
-  input[type="text"],
-  textarea
-  {
+  input[type="text"] {
     @apply px-3 py-1 bg-gray-100 border border-gray-200 rounded w-full md:w-1/2;
+  }
+
+  textarea {
+    @apply px-3 py-1 bg-gray-100 border border-gray-200 rounded w-full;
   }
 
   label {
