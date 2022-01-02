@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Browser\Auth;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\URL;
@@ -31,7 +32,7 @@ class VerifyEmailTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
-                now()->addMinute(),
+                (new Carbon)->addMinute(),
                 ['id' => $user->id, 'hash' => 'invalid_hash']
             );
 
@@ -58,7 +59,7 @@ class VerifyEmailTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
-                now()->subMinute(), // expires
+                (new Carbon)->subMinute(), // expires
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
@@ -85,7 +86,7 @@ class VerifyEmailTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($user) {
             $verificationUrl = URL::temporarySignedRoute(
                 'verification.verify',
-                now()->addMinute(),
+                (new Carbon)->addMinute(),
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 

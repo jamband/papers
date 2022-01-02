@@ -19,7 +19,7 @@ class UserTest extends TestCase
         $user = new User;
         $user->name = 'foo';
         $user->email = 'foo@example.com';
-        $user->email_verified_at = now();
+        $user->email_verified_at = new Carbon;
         $user->password = '$2y$04$8ihtuYjlhwreZwU.YXI83.CPVsNwsk8pcx5XA.dhq8qZn5X92TpYG'; // foofoofoo
         $user->save();
 

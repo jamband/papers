@@ -6,6 +6,7 @@ namespace Tests\Feature\Auth;
 
 use App\Http\Controllers\Auth\VerifyEmail;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
@@ -30,7 +31,7 @@ class VerifyEmailTest extends TestCase
 
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
-            now()->subMinute(), // expires
+            (new Carbon)->subMinute(), // expires
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
@@ -50,7 +51,7 @@ class VerifyEmailTest extends TestCase
 
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
-            now()->addMinutes(),
+            (new Carbon)->addMinutes(),
             ['id' => $user->id, 'hash' => sha1('wrong_email')]
         );
 
@@ -68,7 +69,7 @@ class VerifyEmailTest extends TestCase
 
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
-            now()->addMinutes(),
+            (new Carbon)->addMinutes(),
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
