@@ -30,7 +30,7 @@ class PaperScopeTest extends TestCase
         /** @var User[] $users */
         $users = User::factory()->count(5)->create();
 
-        /** @var Paper $paper */
+        /** @var Paper[] $papers */
         $papers = Paper::factory()->count(2)->create([
             'user_id' => $users[0]->id,
         ]);
