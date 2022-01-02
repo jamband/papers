@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see Paper */
 class PaperTest extends TestCase
 {
     use RefreshDatabase;

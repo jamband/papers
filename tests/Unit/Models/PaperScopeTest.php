@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Models\Paper;
+use App\Models\PaperScope;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/** @see PaperScope */
 class PaperScopeTest extends TestCase
 {
     use RefreshDatabase;

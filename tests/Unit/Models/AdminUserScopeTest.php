@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use App\Models\AdminUser;
+use App\Models\AdminUserScope;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+/** @see AdminUserScope */
 class AdminUserScopeTest extends TestCase
 {
     use RefreshDatabase;
