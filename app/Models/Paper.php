@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,19 +25,17 @@ class Paper extends Model
     private const CREATED_AT_FORMAT = 'F jS Y, g:i a';
     private const UPDATED_AT_FORMAT = self::CREATED_AT_FORMAT;
 
-    /**
-     * @noinspection PhpUnused
-     */
-    public function getCreatedAtAttribute(mixed $value): string
+    public function createdAt(): Attribute
     {
-        return Carbon::parse($value)->format(self::CREATED_AT_FORMAT);
+        return new Attribute(
+            get: fn($value) => Carbon::parse($value)->format(self::CREATED_AT_FORMAT),
+        );
     }
 
-    /**
-     * @noinspection PhpUnused
-     */
-    public function getUpdatedAtAttribute(mixed $value): string
+    public function updatedAt(): Attribute
     {
-        return Carbon::parse($value)->format(self::UPDATED_AT_FORMAT);
+        return new Attribute(
+            get: fn($value) => Carbon::parse($value)->format(self::UPDATED_AT_FORMAT),
+        );
     }
 }
