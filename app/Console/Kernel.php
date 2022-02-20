@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('auth:clear-resets')->everyFifteenMinutes();
     }
 
-    protected function commands():void
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
     }
