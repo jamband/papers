@@ -28,14 +28,14 @@ class Paper extends Model
     public function createdAt(): Attribute
     {
         return new Attribute(
-            get: fn($value) => Carbon::parse($value)->format(self::CREATED_AT_FORMAT),
+            get: fn(mixed $value): string => Carbon::parse($value)->format(self::CREATED_AT_FORMAT),
         );
     }
 
     public function updatedAt(): Attribute
     {
         return new Attribute(
-            get: fn($value) => Carbon::parse($value)->format(self::UPDATED_AT_FORMAT),
+            get: fn(mixed $value): string => Carbon::parse($value)->format(self::UPDATED_AT_FORMAT),
         );
     }
 }
