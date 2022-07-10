@@ -7,7 +7,7 @@ Papers is a project created as a documentation for authentication with Laravel.
 - PHP >= 8.0
 - Composer 2.x
 - SQLite 3
-- Node.js >= 12.14.0
+- Node.js >= 14.x
 - [MailHog](https://github.com/mailhog/MailHog)
 
 ## Install on local
