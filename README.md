@@ -43,7 +43,7 @@ Admin user:
 Unit tests and feature tests:
 
 ```
-php artisan test -p
+php artisan test
 ```
 
 Browser tests:
