@@ -1,7 +1,7 @@
 {
   "require": {
     "php": "^8.0",
-    "laravel/framework": "^9.22"
+    "laravel/framework": "^9.25"
   },
   "require-dev": {
     "fakerphp/faker": "^1.20",
