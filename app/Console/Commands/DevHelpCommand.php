@@ -18,7 +18,7 @@ class DevHelpCommand extends Command
             ['PHP', '>= 8.0'],
             ['Composer', '2.x'],
             ['SQLite', '3'],
-            ['Node.js', '>= 14.x'],
+            ['Node.js', '>= 16.x'],
             ['MailHog', 'https://github.com/mailhog/MailHog'],
         ]);
 
