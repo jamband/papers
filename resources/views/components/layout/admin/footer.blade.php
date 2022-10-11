@@ -1,9 +1,7 @@
 <footer class="py-4 text-center bg-gray-100">
   @auth('admin')
-    <div class="flex items-center justify-center font-bold">
-      <div class="mr-1">
-        <x-icon.light-bulb class="w-5 h-5 text-amber-400" />
-      </div>
+    <div class="text-center font-bold">
+      <x-icon.light-bulb class="w-5 h-5 align-[-0.2em] text-amber-400" />
       Currently logged in as an administrator
     </div>
   @else
