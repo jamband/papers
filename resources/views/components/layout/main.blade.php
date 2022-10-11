@@ -9,11 +9,11 @@
 </head>
 <body>
 <div class="flex flex-col min-h-screen">
-  <x-layout.header></x-layout.header>
+  <x-layout.header />
   <main class="flex-grow container mx-auto pt-28 pb-10">
     {{ $slot }}
   </main>
-  <x-layout.footer></x-layout.footer>
+  <x-layout.footer />
 </div>
 </body>
 </html>
