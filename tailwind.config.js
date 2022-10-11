@@ -3,6 +3,9 @@ module.exports = {
     "./resources/views/**/*.blade.php",
     "./storage/framework/views/*.php",
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     container: {
       padding: "1rem",
