@@ -7,3 +7,4 @@
 .env.dusk.local
 .phpunit.result.cache
 database/app.db
+public/hot
