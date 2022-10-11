@@ -28,8 +28,8 @@
     <a href="{{ route('admin.login') }}">Login as administrator</a>
   </div>
   <p class="text-sm text-amber-500">
-    <x-icon.light-bulb class="inline-block w-5 h-5 align-[-0.25em]" /></span>
+    <x-icon.light-bulb class="w-4 h-4 align-[-0.125em]" />
     This link usually does not exist.
     Displayed for development environment.
-    </p>
+  </p>
 </x-layout.main>

@@ -25,11 +25,11 @@
     <span class="ml-1">as administrator</span>
   </form>
   <hr class="mb-10" />
-  <a href="{{ route('auth.login') }}" class="inline-block mb-2">Login as regular user</a>
-  <div class="flex items-center text-sm text-amber-500">
-    <div class="mr-1">
-      <x-icon.light-bulb class="w-5 h-5" />
-    </div>
-    This is a login link for regular users.
+  <div class="mb-2">
+    <a href="{{ route('auth.login') }}">Login as regular user</a>
   </div>
+  <p class="text-sm text-amber-500">
+    <x-icon.light-bulb class="w-4 h-4 align-[-0.125em]" />
+    This is a login link for regular users.
+  </p>
 </x-layout.admin.main>

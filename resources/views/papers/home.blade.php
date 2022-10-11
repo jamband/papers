@@ -2,20 +2,16 @@
 <x-layout.main title="">
   <h1>Papers</h1>
   <div class="mb-10">
-    <a href="{{ route('paper.create') }}" class="inline-flex items-center">
-      <span class="mr-1"><x-icon.pencil class="w-4 h-4" /></span>
-      Create new paper
-    </a>
+    <x-icon.pencil class="w-4 h-4 align-[-0.125em]" />
+    <a href="{{ route('paper.create') }}">Create new paper</a>
   </div>
   <hr class="mb-10" />
   @foreach ($papers as $paper)
     <section class="mb-3">
       <h2 class="mb-3">{{ $paper->title }}</h2>
       <div class="mb-3">{{ $paper->body }}</div>
-      <div class="mb-1 flex items-center text-sm">
-        <div class="mr-1">
-          <x-icon.clock class="w-4 h-4" />
-        </div>
+      <div class="mb-1 text-sm">
+        <x-icon.clock class="w-4 h-4 align-[-0.17em]" />
         {{ $paper->created_at }}
       </div>
       <a href="{{ route('paper.view', [$paper]) }}" class="mr-2">Detail</a>
