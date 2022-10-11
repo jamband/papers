@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Development;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 
-class DevCleanCommand extends Command
+class Clean extends Command
 {
     protected $signature = 'dev:clean';
 

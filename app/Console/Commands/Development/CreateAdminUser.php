@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Development;
 
 use App\Models\AdminUser;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
-class DevCreateAdminUserCommand extends Command
+class CreateAdminUser extends Command
 {
     private const ADMIN_EMAIL = 'admin@example.com';
 

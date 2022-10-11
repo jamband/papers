@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Development;
 
 use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
@@ -10,7 +10,7 @@ use Illuminate\Encryption\Encrypter;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
-class DevInitCommand extends Command
+class Init extends Command
 {
     protected $signature = 'dev:init';
 

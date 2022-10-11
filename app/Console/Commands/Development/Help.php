@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Development;
 
 use Illuminate\Console\Command;
 
-class DevHelpCommand extends Command
+class Help extends Command
 {
     protected $signature = 'dev:help';
 
