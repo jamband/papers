@@ -19,6 +19,14 @@ cd papers
 composer run dev
 ```
 
+## Start the development server
+
+```
+php artisan serve
+npm run dev
+MailHog
+```
+
 ## Actions
 
 General user:

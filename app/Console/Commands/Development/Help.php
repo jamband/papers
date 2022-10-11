@@ -30,6 +30,8 @@ class Help extends Command
             ['php artisan dusk'],
             ['php artisan down'],
             ['php artisan up'],
+            ['npm run dev'],
+            ['npm run build'],
         ]);
 
         $this->warn("\nNote that MailHog needs to be running for some action.\n".

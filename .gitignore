@@ -1,11 +1,9 @@
 /.idea
 /node_modules
+/public/build
 /vendor
 .env
 .env.backup
 .env.dusk.local
 .phpunit.result.cache
 database/app.db
-public/js
-public/css
-public/mix-manifest.json

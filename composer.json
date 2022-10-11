@@ -31,7 +31,7 @@
     "post-update-cmd": [
       "@php artisan vendor:publish --tag=laravel-assets --ansi"
     ],
-    "dev": "@composer i && npm i && npm run dev && php artisan dev:init",
+    "dev": "@composer i && npm i && npm run build && php artisan dev:init",
     "clear": "@php artisan dev:clean",
     "clean": "@php artisan dev:clean && rm -rf vendor"
   },

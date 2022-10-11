@@ -16,8 +16,7 @@ class Clean extends Command
     private const FILES = [
         // directories
         'node_modules',
-        'public/css',
-        'public/js',
+        'public/build',
 
         // files
         '.env',
@@ -27,7 +26,6 @@ class Clean extends Command
         'storage/logs/*',
         'storage/framework/sessions/*',
         'storage/framework/testing/*',
-        'public/mix-manifest.json'
     ];
 
     public function handle(): int
