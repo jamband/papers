@@ -1,6 +1,6 @@
 <x-layout.main title="Update paper">
   <h1>Update paper</h1>
-  <form action="{{ route('paper.update', [$paper]) }}" method="POST">
+  <form action="{{ route('paper.update', [$paper]) }}" method="POST" class="mb-10 md:mb-20">
     @csrf
     <div class="mb-5">
       <label for="title" class="block">Title</label>
@@ -14,7 +14,7 @@
     </div>
     <x-button dusk="update-paper-button">Update</x-button>
   </form>
-  <div class="mt-10 md:mt-20 text-center">
+  <div class="text-center">
     <a href="{{ route('paper.home') }}">Back to Papers</a>
   </div>
 </x-layout.main>

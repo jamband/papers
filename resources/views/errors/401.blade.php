@@ -1,9 +1,9 @@
 <x-layout.main title="Unauthorized">
   <h1>Unauthorized</h1>
-  <p>
+  <p class="mb-20">
     Unauthorized.
   </p>
-  <div class="mt-20 text-center">
+  <div class="text-center">
     <a href="{{ route('home') }}">Back to Home</a>
   </div>
 </x-layout.main>

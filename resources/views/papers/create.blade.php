@@ -1,6 +1,6 @@
 <x-layout.main title="Create new paper">
   <h1>Create new paper</h1>
-  <form action="{{ route("paper.create") }}" method="POST">
+  <form action="{{ route("paper.create") }}" method="POST" class="mb-10 md:mb-20">
     @csrf
     <div class="mb-5">
       <label for="title" class="block">Title</label>
@@ -14,7 +14,7 @@
     </div>
     <x-button dusk="create-paper-button">Create</x-button>
   </form>
-  <div class="mt-10 md:mt-20 text-center">
+  <div class="text-center">
     <a href="{{ route("paper.home") }}">Back to Papers</a>
   </div>
 </x-layout.main>

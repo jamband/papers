@@ -1,13 +1,14 @@
 <x-layout.main title="">
   <h1>Home</h1>
   <x-auth.session-status :status="session('status')" class="mb-5" />
-  <div class="mt-20 flex items-center justify-center">
+  <div class="mb-20"></div>
+  <div class="mb-10 flex items-center justify-center">
     <a href="{{ route("paper.home") }}" class="px-5 py-2">Papers</a>
     @auth
       <a href="{{ route('profile') }}" class="px-5 py-2">Profile</a>
     @endauth
   </div>
-  <hr class="my-10" />
+  <hr class="mb-10" />
   <div class="flex items-center justify-center">
     @auth
       <form action="{{ route('auth.logout') }}" method="POST">

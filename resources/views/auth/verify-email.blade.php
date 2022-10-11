@@ -12,11 +12,11 @@
       you provided during registration.
     </div>
   @endif
-  <form method="POST" action="{{ route('verification.send') }}">
+  <form method="POST" action="{{ route('verification.send') }}" class="mb-10">
     @csrf
     <x-button>Resend Verification Email</x-button>
   </form>
-  <hr class="my-10" />
+  <hr class="mb-10" />
   <div class="flex items-center justify-center">
     <form action="{{ route('auth.logout') }}" method="POST">
       @csrf

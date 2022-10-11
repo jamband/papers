@@ -1,6 +1,6 @@
 <x-layout.main title="Sign up">
   <h1>Register</h1>
-  <form action="{{ route('auth.register') }}" method="POST">
+  <form action="{{ route('auth.register') }}" method="POST" class="mb-10">
     @csrf
     <div class="mb-5">
       <label for="name">Name</label>
@@ -23,7 +23,7 @@
     </div>
     <x-button>Register</x-button>
   </form>
-  <hr class="my-10" />
+  <hr class="mb-10" />
   <div class="flex items-center">
     <div class="mr-1">
       <x-icon.light-bulb class="w-5 h-5" />

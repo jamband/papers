@@ -1,7 +1,7 @@
 <x-layout.main title="Login">
   <h1>Login</h1>
   <x-auth.session-status :status="session('status')" class="mb-5" />
-  <form action="{{ route('auth.login') }}" method="POST">
+  <form action="{{ route('auth.login') }}" method="POST" class="mb-10">
     @csrf
     <div class="mb-5">
       <label for="email">Email</label>
@@ -23,13 +23,13 @@
     <span class="mx-1">or</span>
     <a href="{{ route('password.forgot') }}">Forgot password?</a>
   </form>
-  <hr class="my-10" />
-  <a href="{{ route('admin.login') }}">Login as administrator</a>
-  <div class="mt-2 flex items-center text-sm text-amber-500">
-    <div class="mr-1">
-      <x-icon.light-bulb class="w-5 h-5" />
-    </div>
+  <hr class="mb-10" />
+  <div class="mb-2">
+    <a href="{{ route('admin.login') }}">Login as administrator</a>
+  </div>
+  <p class="text-sm text-amber-500">
+    <x-icon.light-bulb class="inline-block w-5 h-5 align-[-0.25em]" /></span>
     This link usually does not exist.
     Displayed for development environment.
-  </div>
+    </p>
 </x-layout.main>

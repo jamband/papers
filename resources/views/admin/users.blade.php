@@ -7,12 +7,12 @@
     <div>Email: {{ $user->email }}</div>
     <div>Created at: {{ $user->created_at->format('F jS Y, g:i a') }}</div>
     <div class="mb-2">Updated at: {{ $user->updated_at->format('F jS Y, g:i a') }}</div>
-    <form action="{{ route('admin.user.delete', [$user]) }}" method="POST">
+    <form action="{{ route('admin.user.delete', [$user]) }}" method="POST" class="mb-3">
       @csrf
       <x-button onclick="return confirm('Are you sure you want to delete it?');" dusk="delete-user-button">
         Delete
       </x-button>
     </form>
-    <hr class="mt-3 mb-10" />
+    <hr class="mb-10" />
   @endforeach
 </x-layout.admin.main>
