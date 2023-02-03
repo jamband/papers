@@ -1,11 +1,11 @@
 {
   "require": {
     "php": "^8.0",
-    "laravel/framework": "^9.47"
+    "laravel/framework": "^9.50"
   },
   "require-dev": {
     "fakerphp/faker": "^1.21",
-    "laravel/dusk": "^7.4",
+    "laravel/dusk": "^7.5",
     "mockery/mockery": "^1.5",
     "nunomaduro/collision": "^6.4",
     "phpunit/phpunit": "^9.5",
