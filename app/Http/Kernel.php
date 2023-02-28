@@ -48,7 +48,7 @@ class Kernel extends HttpKernel
         ],
     ];
 
-    protected $routeMiddleware = [
+    protected $middlewareAliases = [
         'auth' => Authenticate::class,
         'cache.headers' => SetCacheHeaders::class,
         'can' => Authorize::class,
