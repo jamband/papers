@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Console\Commands\Development;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Process\Process;
+use Illuminate\Process\PendingProcess;
 
 class Clean extends Command
 {
@@ -28,13 +28,14 @@ class Clean extends Command
         'storage/framework/testing/*',
     ];
 
-    public function handle(): int
+    public function handle(
+        PendingProcess $process,
+    ): int
     {
         $this->call('dusk:purge');
         $this->call('optimize:clear');
 
-        $command = 'rm -rf '.implode(' ', self::FILES);
-        Process::fromShellCommandline($command)->run();
+        $process->run('rm -rf '.implode(' ', self::FILES));
 
         $this->info('Clean up completed.');
 
