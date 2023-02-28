@@ -15,6 +15,7 @@ class Clean extends Command
 
     private const FILES = [
         // directories
+        '.phpunit.cache',
         'node_modules',
         'public/build',
 
