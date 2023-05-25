@@ -18,7 +18,7 @@ class Help extends Command
             ['PHP', '>= 8.1'],
             ['Composer', '>= 2.2.0'],
             ['SQLite', '3'],
-            ['Node.js', '>= 16.x'],
+            ['Node.js', '>= 18.x'],
             ['MailHog', 'https://github.com/mailhog/MailHog'],
         ]);
 
