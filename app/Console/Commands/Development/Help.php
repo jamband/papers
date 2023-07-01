@@ -19,7 +19,7 @@ class Help extends Command
             ['Composer', '>= 2.2.0'],
             ['SQLite', '3'],
             ['Node.js', '>= 18.x'],
-            ['MailHog', 'https://github.com/mailhog/MailHog'],
+            ['Mailpit', 'https://github.com/axllent/mailpit'],
         ]);
 
         $this->table(['Command examples'], [
@@ -34,7 +34,7 @@ class Help extends Command
             ['npm run build'],
         ]);
 
-        $this->warn("\nNote that MailHog needs to be running for some action.\n".
+        $this->warn("\nNote that Mailpit needs to be running for some action.\n".
             'e.g. such as register action, forgot password action and browser testing.');
 
         return self::SUCCESS;

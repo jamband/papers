@@ -8,7 +8,7 @@ Papers is a project created as a documentation for authentication with Laravel.
 - Composer >= 2.2.0
 - SQLite 3
 - Node.js >= 18.x
-- [MailHog](https://github.com/mailhog/MailHog)
+- [Mailpit](https://github.com/axllent/mailpit)
 
 ## Install on local
 
@@ -24,7 +24,7 @@ composer run dev
 ```
 php artisan serve
 npm run dev
-MailHog
+mailpit
 ```
 
 ## Actions
@@ -58,7 +58,7 @@ Browser tests:
 
 ```
 php artisan serve
-MailHog
+mailpit
 php artisan dusk
 ```
 
