@@ -7,8 +7,8 @@
     "fakerphp/faker": "^1.23",
     "laravel/dusk": "^7.9",
     "mockery/mockery": "^1.6",
-    "nunomaduro/collision": "^7.7",
-    "phpunit/phpunit": "10.2.7",
+    "nunomaduro/collision": "^7.8",
+    "phpunit/phpunit": "^10.3",
     "spatie/laravel-ignition": "^2.2"
   },
   "autoload": {
