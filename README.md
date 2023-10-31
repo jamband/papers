@@ -59,6 +59,7 @@ Browser tests:
 ```
 php artisan serve
 mailpit
+php artisan dusk:chrome-driver
 php artisan dusk
 ```
 
