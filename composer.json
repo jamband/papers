@@ -1,14 +1,14 @@
 {
   "require": {
     "php": "^8.2",
-    "laravel/framework": "^10.34"
+    "laravel/framework": "^10.39"
   },
   "require-dev": {
     "fakerphp/faker": "^1.23",
-    "laravel/dusk": "^7.11",
+    "laravel/dusk": "^7.12",
     "mockery/mockery": "^1.6",
     "nunomaduro/collision": "^7.10",
-    "phpunit/phpunit": "^10.4",
+    "phpunit/phpunit": "^10.5",
     "spatie/laravel-ignition": "^2.3"
   },
   "autoload": {
