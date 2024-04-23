@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Groups\Admin\AdminUser;
+use App\Groups\Users\User;
+
 return [
     'defaults' => [
         'guard' => 'web',
@@ -20,11 +23,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
         'admin_users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\AdminUser::class,
+            'model' => AdminUser::class,
         ]
     ],
     'passwords' => [

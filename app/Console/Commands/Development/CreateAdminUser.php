@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Development;
 
-use App\Models\AdminUser;
+use App\Groups\Admin\AdminUser;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +28,7 @@ class CreateAdminUser extends Command
         $adminUser = new AdminUser;
         $adminUser->name = 'admin';
         $adminUser->email = self::ADMIN_EMAIL;
-        $adminUser->email_verified_at = new Carbon;
+        $adminUser->email_verified_at = new Carbon();
         $adminUser->password = Hash::make(str_repeat($adminUser->name, 2));
         $adminUser->save();
 

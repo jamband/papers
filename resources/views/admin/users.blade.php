@@ -1,4 +1,4 @@
-@php /** @var App\Models\User[] $users */ @endphp
+@php /** @var array<int, App\Groups\Users\User> $users */ @endphp
 <x-layout.admin.main title="Manage Users">
   <h1>Manage Users</h1>
   <x-auth.session-status :status="session('status')" class="mb-5" />

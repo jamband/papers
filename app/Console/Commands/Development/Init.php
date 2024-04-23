@@ -8,7 +8,6 @@ use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class Init extends Command
 {
@@ -17,15 +16,12 @@ class Init extends Command
     protected $description = 'Prepare the project for the development environment';
 
     public function __construct(
-        private Filesystem $file,
-        private Repository $config,
+        private readonly Filesystem $file,
+        private readonly Repository $config,
     ) {
         parent::__construct();
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
     public function handle(): int
     {
         $this->file->copy('.env.example', '.env');
@@ -51,9 +47,6 @@ class Init extends Command
         return self::SUCCESS;
     }
 
-    /**
-     * @throws FileNotFoundException
-     */
     private function prepareEnvironmentFile(): void
     {
         $envFilename = $this->laravel->environmentFilePath();
