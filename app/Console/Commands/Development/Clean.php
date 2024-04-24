@@ -31,8 +31,7 @@ class Clean extends Command
 
     public function handle(
         PendingProcess $process,
-    ): int
-    {
+    ): int {
         $this->call('dusk:purge');
         $this->call('optimize:clear');
 
