@@ -1,7 +1,7 @@
 <x-layout.main title="Service Unavailable">
   <h1>Service Unavailable</h1>
   <p>
-    <x-icon.light-bulb class="w-5 h-5" />
+    <x-icon.light-bulb class="inline w-5 h-5 align-[-0.175em]" />
     Currently in maintenance.
   </p>
 </x-layout.main>

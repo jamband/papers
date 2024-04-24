@@ -1,9 +1,11 @@
 <x-layout.main title="Profile">
   <h1>Profile</h1>
-  <section class="mb-10">
+  <div>
     <div>Name: {{ $name }}</div>
     <div>Email: {{ $email }}</div>
-  </section>
-  <hr class="mb-10" />
-  <a href="{{ route('auth.delete') }}">Delete account</a>
+  </div>
+  <hr class="mt-10" />
+  <div class="mt-10">
+    <a href="{{ route('auth.delete') }}" class="mt-10">Delete account</a>
+  </div>
 </x-layout.main>
