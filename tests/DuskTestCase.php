@@ -7,15 +7,13 @@ namespace Tests;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Illuminate\Support\Collection;
 use Laravel\Dusk\TestCase as BaseTestCase;
+use PHPUnit\Framework\Attributes\BeforeClass;
 
 abstract class DuskTestCase extends BaseTestCase
 {
-    use CreatesApplication;
-
-    /**
-     * @beforeClass
-     */
+    #[BeforeClass]
     public static function prepare(): void
     {
         if (!static::runningInSail()) {
@@ -25,9 +23,9 @@ abstract class DuskTestCase extends BaseTestCase
 
     protected function driver(): RemoteWebDriver
     {
-        $options = (new ChromeOptions)->addArguments(collect([
-            '--window-size=1920,1080',
-        ])->unless($this->hasHeadlessDisabled(), function ($items) {
+        $options = (new ChromeOptions())->addArguments((new Collection([
+            $this->shouldStartMaximized() ? '--start-maximized' : '--window-size=1920,1080',
+        ]))->unless($this->hasHeadlessDisabled(), function (Collection $items) {
             return $items->merge([
                 '--disable-gpu',
                 '--headless',
@@ -40,11 +38,5 @@ abstract class DuskTestCase extends BaseTestCase
                 ChromeOptions::CAPABILITY, $options
             )
         );
-    }
-
-    protected function hasHeadlessDisabled(): bool
-    {
-        return isset($_SERVER['DUSK_HEADLESS_DISABLED']) ||
-            isset($_ENV['DUSK_HEADLESS_DISABLED']);
     }
 }
