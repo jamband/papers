@@ -6,7 +6,7 @@ namespace App\Groups\Users;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,10 +19,11 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $remember_token
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @mixin Builder<self>
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory;
     use Notifiable;
 
     protected $hidden = [

@@ -29,6 +29,8 @@ class CreatePaper extends Controller
         $this->paper->body = $data['body'];
         $this->paper->save();
 
-        return $this->redirect->route('paper.view', [$this->paper]);
+        return $this->redirect->route('paper.view', [
+            $this->paper
+        ]);
     }
 }

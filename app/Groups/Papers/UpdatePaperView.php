@@ -12,6 +12,7 @@ use Illuminate\View\View;
 class UpdatePaperView extends Controller
 {
     public function __construct(
+        private readonly Paper $paper,
         private readonly Factory $view,
         private readonly AuthManager $auth,
     ) {
@@ -22,8 +23,10 @@ class UpdatePaperView extends Controller
     public function __invoke(int $id): View
     {
         /** @var Paper $query */
-        $query = Paper::query();
-        $paper = $query->byUserId($this->auth->id())->findOrFail($id);
+        $query = $this->paper::query();
+
+        $paper = $query->byUserId($this->auth->id())
+            ->findOrFail($id);
 
         return $this->view->make("papers.update", [
             'paper' => $paper,

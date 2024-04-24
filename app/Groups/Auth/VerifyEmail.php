@@ -6,6 +6,7 @@ namespace App\Groups\Auth;
 
 use App\Groups\Users\User;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
@@ -15,6 +16,7 @@ class VerifyEmail extends Controller
 {
     public function __construct(
         private readonly Redirector $redirect,
+        private readonly Dispatcher $event,
     ) {
         $this->middleware('auth');
         $this->middleware('signed');
@@ -31,7 +33,7 @@ class VerifyEmail extends Controller
         }
 
         if ($user->markEmailAsVerified()) {
-            event(new Verified($user));
+            $this->event->dispatch(new Verified($user));
         }
 
         return $this->redirect->route('home')

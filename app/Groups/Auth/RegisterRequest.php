@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Groups\Auth;
 
+use Illuminate\Config\Repository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules;
 
@@ -19,14 +20,15 @@ class RegisterRequest extends FormRequest
         return true;
     }
 
-    public function rules(): array
-    {
+    public function rules(
+        Repository $config,
+    ): array {
         return [
             'name' => [
                 'required',
                 'string',
-                'min:'.config('auth.name_min_length'),
-                'max:'.config('auth.name_max_length'),
+                'min:'.$config->get('auth.name_min_length'),
+                'max:'.$config->get('auth.name_max_length'),
             ],
             'email' => [
                 'required',
@@ -39,8 +41,8 @@ class RegisterRequest extends FormRequest
                 'required',
                 'string',
                 'confirmed',
-                'min:'.config('auth.password_min_length'),
-                'max:'.config('auth.password_max_length'),
+                'min:'.$config->get('auth.password_min_length'),
+                'max:'.$config->get('auth.password_max_length'),
                 Rules\Password::defaults(),
             ],
         ];

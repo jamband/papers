@@ -7,12 +7,15 @@ namespace App\Groups\Admin;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method Builder byEmail(string $email)
+ * @method self byEmail(string $email)
+ * @see self::scopeByEmail())
  */
 trait AdminUserScope
 {
     /**
-     * @noinspection PhpUnused
+     * @param Builder<self> $query
+     * @param string $email
+     * @return Builder<self>
      */
     public function scopeByEmail(Builder $query, string $email): Builder
     {

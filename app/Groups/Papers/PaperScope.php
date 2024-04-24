@@ -7,12 +7,15 @@ namespace App\Groups\Papers;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * @method Builder byUserId(int $userId)
+ * @method self byUserId(int $userId)
+ * @see self::scopeByUserId()
  */
 trait PaperScope
 {
     /**
-     * @noinspection PhpUnused
+     * @param Builder<self> $query
+     * @param int $userId
+     * @return Builder<self>
      */
     public function scopeByUserId(Builder $query, int $userId): Builder
     {

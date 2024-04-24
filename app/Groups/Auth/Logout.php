@@ -26,8 +26,7 @@ class Logout extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return $this->redirect
-            ->route('home')
+        return $this->redirect->route('home')
             ->with('status', 'Logged out.');
     }
 }

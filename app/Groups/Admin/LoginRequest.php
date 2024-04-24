@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Groups\Admin;
 
+use Illuminate\Auth\AuthManager;
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Cache\RateLimiter;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -18,6 +19,10 @@ use Illuminate\Validation\ValidationException;
  */
 class LoginRequest extends FormRequest
 {
+    private AuthManager $auth;
+    private RateLimiter $rateLimiter;
+    private Dispatcher $event;
+
     private const MAX_ATTEMPTS = 3;
 
     public function authorize(): bool
@@ -25,8 +30,15 @@ class LoginRequest extends FormRequest
         return true;
     }
 
-    public function rules(): array
-    {
+    public function rules(
+        AuthManager $auth,
+        RateLimiter $rateLimiter,
+        Dispatcher $event,
+    ): array {
+        $this->auth = $auth;
+        $this->rateLimiter = $rateLimiter;
+        $this->event = $event;
+
         return [
             'email' => [
                 'required',
@@ -40,38 +52,32 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
 
-        if (!Auth::guard('admin')->attempt(
+        if (!$this->auth->guard('admin')->attempt(
             $this->only('email', 'password'),
             $this->boolean('remember')
         )) {
-            RateLimiter::hit($this->throttleKey());
+            $this->rateLimiter->hit($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'email' => __('auth.failed'),
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey());
+        $this->rateLimiter->clear($this->throttleKey());
     }
 
-    /**
-     * @throws ValidationException
-     */
     private function ensureIsNotRateLimited(): void
     {
-        if (RateLimiter::tooManyAttempts(
+        if ($this->rateLimiter->tooManyAttempts(
             $this->throttleKey(),
             self::MAX_ATTEMPTS
         )) {
-            event(new Lockout($this));
-            $seconds = RateLimiter::availableIn($this->throttleKey());
+            $this->event->dispatch(new Lockout($this));
+            $seconds = $this->rateLimiter->availableIn($this->throttleKey());
 
             throw ValidationException::withMessages([
                 'email' => __('auth.throttle', [

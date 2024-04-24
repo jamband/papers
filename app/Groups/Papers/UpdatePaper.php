@@ -28,7 +28,9 @@ class UpdatePaper extends Controller
         $query = $this->paper::query();
 
         /** @var Paper $paper */
-        $paper = $query->byUserId($this->auth->id())->findOrFail($id);
+        $paper = $query->byUserId($this->auth->id())
+            ->findOrFail($id);
+
         $paper->user_id = $this->auth->id();
         $paper->title = $data['title'];
         $paper->body = $data['body'];

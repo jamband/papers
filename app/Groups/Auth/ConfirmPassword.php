@@ -11,13 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\Factory;
-use Illuminate\View\View;
 
 class ConfirmPassword extends Controller
 {
     public function __construct(
-        private readonly Factory $view,
         private readonly AuthManager $auth,
         private readonly Redirector $redirect,
     ) {
@@ -25,12 +22,7 @@ class ConfirmPassword extends Controller
         $this->middleware('throttle:6,1');
     }
 
-    public function view(): View
-    {
-        return $this->view->make('auth.confirm-password');
-    }
-
-    public function confirmPassword(Request $request): RedirectResponse
+    public function __invoke(Request $request): RedirectResponse
     {
         /** @var User $user */
         $user = $request->user();

@@ -7,11 +7,13 @@ namespace App\Groups\Admin;
 use App\Groups\Users\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Routing\Redirector;
 
 class DeleteUser extends Controller
 {
     public function __construct(
         private readonly User $user,
+        private readonly Redirector $redirect,
     ) {
         $this->middleware('auth:admin');
     }
@@ -24,7 +26,7 @@ class DeleteUser extends Controller
 
         $user->delete();
 
-        return redirect()->route('admin.users')
+        return $this->redirect->route('admin.users')
             ->with('status', $user->name.' has been deleted.');
     }
 }

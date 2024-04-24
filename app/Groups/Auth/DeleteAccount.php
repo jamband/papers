@@ -10,13 +10,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
-use Illuminate\View\Factory;
-use Illuminate\View\View;
 
 class DeleteAccount extends Controller
 {
     public function __construct(
-        private readonly Factory $view,
         private readonly AuthManager $auth,
         private readonly User $user,
         private readonly Redirector $redirect,
@@ -26,12 +23,7 @@ class DeleteAccount extends Controller
         $this->middleware('password.confirm');
     }
 
-    public function view(): View
-    {
-        return $this->view->make('auth.delete-account');
-    }
-
-    public function deleteAccount(Request $request): RedirectResponse
+    public function __invoke(Request $request): RedirectResponse
     {
         $id = $this->auth->id();
         $this->auth->guard('web')->logout();
@@ -39,10 +31,11 @@ class DeleteAccount extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        $this->user::query()->find($id)->delete();
+        $this->user::query()
+            ->find($id)
+            ->delete();
 
-        return $this->redirect
-            ->route('home')
+        return $this->redirect->route('home')
             ->with('status', 'Account deletion has been completed.');
     }
 }

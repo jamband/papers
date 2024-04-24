@@ -13,6 +13,7 @@ use Illuminate\View\View;
 class GetPapers extends Controller
 {
     public function __construct(
+        private readonly Paper $paper,
         private readonly Factory $view,
         private readonly AuthManager $auth,
     ) {
@@ -23,7 +24,7 @@ class GetPapers extends Controller
     public function __invoke(Request $request): View
     {
         /** @var Paper $query */
-        $query = Paper::query();
+        $query = $this->paper::query();
 
         $papers = $query->byUserId($this->auth->id())
             ->latest()
