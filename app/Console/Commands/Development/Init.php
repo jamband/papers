@@ -34,7 +34,6 @@ class Init extends Command
 
         $this->call('migrate', [
             '--force' => true,
-            '--seed' => true,
         ]);
 
         $this->call('dev:create-admin-user');
