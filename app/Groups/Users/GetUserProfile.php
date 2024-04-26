@@ -21,11 +21,12 @@ class GetUserProfile extends Controller
 
     public function __invoke(): View
     {
+        /** @var User $user */
         $user = $this->auth->user();
 
         return $this->view->make('site.profile', [
-            'name' => $user['name'],
-            'email' => $user['email'],
+            'name' => $user->name,
+            'email' => $user->email,
         ]);
     }
 }

@@ -2,23 +2,62 @@
 
 declare(strict_types=1);
 
-$app = new Illuminate\Foundation\Application(
-    $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
-);
+use App\Groups\Users\User;
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Container\Container;
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Illuminate\Routing\ResponseFactory;
+use Illuminate\Routing\RouteRegistrar;
 
-$app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
-);
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        using: function () {
+            /** @var Application $app */
+            $app = Container::getInstance()->make(Application::class);
+            /** @var RouteRegistrar $router */
+            $router = Container::getInstance()->make(RouteRegistrar::class);
 
-$app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    App\Console\Kernel::class
-);
+            $groups = [
+                'Admin',
+                'Auth',
+                'Users',
+                'Papers',
+                'Site',
+            ];
 
-$app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    App\Exceptions\Handler::class
-);
+            foreach ($groups as $group) {
+                $router->middleware('web')->group(
+                    $app->basePath('app/Groups/'.$group.'/_routes.php')
+                );
+            }
+        },
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'auth' => Authenticate::class,
+            'guest' => RedirectIfAuthenticated::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        $exceptions->render(function (InvalidSignatureException $e, Request $request) {
+            /** @var ResponseFactory $response */
+            $response = Container::getInstance()->make(ResponseFactory::class);
 
-return $app;
+            /** @var User $user */
+            $user = $request->user();
+
+            $data['exception'] = $e;
+
+            if ($request->routeIs('verification.verify') && !$user->hasVerifiedEmail()) {
+                $data['title'] = __('verification.verify.title');
+                $data['message'] = __('verification.verify.message');
+            }
+
+            return $response->view('errors.403', $data, $e->getStatusCode());
+        });
+    })->create();

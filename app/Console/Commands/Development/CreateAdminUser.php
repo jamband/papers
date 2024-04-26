@@ -11,6 +11,7 @@ use Illuminate\Hashing\HashManager;
 
 class CreateAdminUser extends Command
 {
+    private const ADMIN_NAME = 'admin';
     private const ADMIN_EMAIL = 'admin@example.com';
 
     protected $signature = 'dev:create-admin-user';
@@ -31,10 +32,10 @@ class CreateAdminUser extends Command
         }
 
         $adminUser = new AdminUser();
-        $adminUser->name = 'admin';
+        $adminUser->name = self::ADMIN_NAME;
         $adminUser->email = self::ADMIN_EMAIL;
         $adminUser->email_verified_at = new Carbon();
-        $adminUser->password = $hash->make(str_repeat($adminUser->name, 2));
+        $adminUser->password = $hash->make(str_repeat(self::ADMIN_NAME, 2));
         $adminUser->save();
 
         $this->info('An admin user has been created.');

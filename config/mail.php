@@ -7,13 +7,13 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
+            'url' => env('MAIL_URL'),
+            'host' => env('MAIL_HOST', '0.0.0.0'),
+            'port' => env('MAIL_PORT', 1025),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'auth_mode' => null,
         ],
         'ses' => [
             'transport' => 'ses',
@@ -26,7 +26,7 @@ return [
         ],
         'sendmail' => [
             'transport' => 'sendmail',
-            'path' => '/usr/sbin/sendmail -bs',
+            'path' => '/usr/sbin/sendmail -bs -i',
         ],
         'log' => [
             'transport' => 'log',
@@ -45,12 +45,6 @@ return [
     ],
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
-    ],
-    'markdown' => [
-        'theme' => 'default',
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
+        'name' => env('MAIL_FROM_NAME', 'Papers'),
     ],
 ];
