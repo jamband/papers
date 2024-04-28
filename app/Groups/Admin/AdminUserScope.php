@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @method self byEmail(string $email)
- * @see self::scopeByEmail())
+ * @see self::scopeByEmail()
  */
 trait AdminUserScope
 {

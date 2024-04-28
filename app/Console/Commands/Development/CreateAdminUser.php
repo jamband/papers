@@ -11,8 +11,9 @@ use Illuminate\Hashing\HashManager;
 
 class CreateAdminUser extends Command
 {
-    private const ADMIN_NAME = 'admin';
-    private const ADMIN_EMAIL = 'admin@example.com';
+    private const ADMIN_USER_NAME = 'admin';
+    private const ADMIN_USER_EMAIL = 'admin@example.com';
+    private const ADMIN_USER_PASSWORD = 'adminadmin';
 
     protected $signature = 'dev:create-admin-user';
 
@@ -21,21 +22,22 @@ class CreateAdminUser extends Command
     public function handle(
         AdminUser $adminUser,
         HashManager $hash,
+        Carbon $carbon,
     ): int {
         /** @var AdminUser $query */
         $query = $adminUser::query();
 
-        if ($query->byEmail(self::ADMIN_EMAIL)->exists()) {
+        if ($query->byEmail(self::ADMIN_USER_EMAIL)->exists()) {
             $this->error('Admin user has already been created.');
 
             return self::FAILURE;
         }
 
         $adminUser = new AdminUser();
-        $adminUser->name = self::ADMIN_NAME;
-        $adminUser->email = self::ADMIN_EMAIL;
-        $adminUser->email_verified_at = new Carbon();
-        $adminUser->password = $hash->make(str_repeat(self::ADMIN_NAME, 2));
+        $adminUser->name = self::ADMIN_USER_NAME;
+        $adminUser->email = self::ADMIN_USER_EMAIL;
+        $adminUser->email_verified_at = $carbon::now();
+        $adminUser->password = $hash->make(self::ADMIN_USER_PASSWORD);
         $adminUser->save();
 
         $this->info('An admin user has been created.');

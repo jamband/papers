@@ -52,9 +52,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * @throws ValidationException
-     */
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
@@ -73,9 +70,6 @@ class LoginRequest extends FormRequest
         $this->rateLimiter->clear($this->throttleKey());
     }
 
-    /**
-     * @throws ValidationException
-     */
     private function ensureIsNotRateLimited(): void
     {
         if ($this->rateLimiter->tooManyAttempts(

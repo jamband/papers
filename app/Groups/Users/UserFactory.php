@@ -23,13 +23,16 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
+        /** @var Carbon $carbon */
+        $carbon = Container::getInstance()->make(Carbon::class);
+
         /** @var HashManager $hash */
         $hash = Container::getInstance()->make(HashManager::class);
 
         return [
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => new Carbon(),
+            'email_verified_at' => $carbon::now(),
             'password' => static::$password ??= $hash->make(self::PASSWORD),
             'remember_token' => Str::random(10),
         ];

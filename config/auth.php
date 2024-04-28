@@ -52,5 +52,4 @@ return [
 //        'expire' => 60,
 //    ],
     'password_timeout' => 10800,
-
 ];
