@@ -15,17 +15,19 @@ class AdminUserScopeTest extends TestCase
     use RefreshDatabase;
 
     private AdminUser $adminUser;
+    private AdminUserFactory $adminUserFactory;
 
     protected function setup(): void
     {
         parent::setUp();
 
         $this->adminUser = new AdminUser();
+        $this->adminUserFactory = new AdminUserFactory();
     }
 
     public function testInvalidByEmail(): void
     {
-        AdminUserFactory::new()
+        $this->adminUserFactory
             ->createOne();
 
         $this->assertFalse($this->adminUser->byEmail('foo@example.com')->exists());
@@ -33,11 +35,10 @@ class AdminUserScopeTest extends TestCase
 
     public function testByEmail(): void
     {
-        /** @var AdminUser $adminUser */
-        $adminUser = AdminUserFactory::new()
+        $adminUser = $this->adminUserFactory
             ->createOne();
 
-        AdminUserFactory::new()
+        $this->adminUserFactory
             ->count(3)->state(new Sequence(
                 ['email' => 'foo@example.com'],
                 ['email' => 'bar@example.com'],

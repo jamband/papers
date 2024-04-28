@@ -6,29 +6,41 @@ namespace Tests\Feature\Groups\Admin;
 
 use App\Groups\Admin\AdminUserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
 
 class HomeTest extends TestCase
 {
     use RefreshDatabase;
 
+    private AdminUserFactory $adminUserFactory;
+    private UrlGenerator $url;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->adminUserFactory = new AdminUserFactory();
+        $this->url = $this->app->make(UrlGenerator::class);
+    }
+
     public function testVerifiedMiddleware(): void
     {
-        $this->actingAs(AdminUserFactory::new()->unverified()->createOne(), 'admin')
-            ->get(route('admin.home'))
-            ->assertRedirect(route('verification.notice'));
+        $this->actingAs($this->adminUserFactory->unverified()->makeOne(), 'admin')
+            ->get($this->url->route('admin.home'))
+            ->assertRedirect($this->url->route('verification.notice'));
     }
 
     public function testAuthMiddleware(): void
     {
-        $this->get(route('admin.home'))
-            ->assertRedirect(route('admin.login'));
+        $this->get($this->url->route('admin.home'))
+            ->assertRedirect($this->url->route('admin.login'));
     }
 
     public function testView(): void
     {
-        $this->actingAs(AdminUserFactory::new()->createOne(), 'admin')
-            ->get(route('admin.home'))
+        $this->actingAs($this->adminUserFactory->makeOne(), 'admin')
+            ->get($this->url->route('admin.home'))
             ->assertOk();
     }
 }

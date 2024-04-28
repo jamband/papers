@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Admin;
 
-use App\Groups\Admin\AdminUser;
 use App\Groups\Admin\AdminUserFactory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -14,10 +13,18 @@ class LogoutTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+    private AdminUserFactory $adminUserFactory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->adminUserFactory = new AdminUserFactory();
+    }
+
     public function testLogout(): void
     {
-        /** @var AdminUser $adminUser */
-        $adminUser = AdminUserFactory::new()
+        $adminUser = $this->adminUserFactory
             ->createOne();
 
         $this->browse(function (Browser $browser) use ($adminUser) {

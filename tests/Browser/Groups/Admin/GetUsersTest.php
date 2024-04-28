@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Admin;
 
-use App\Groups\Admin\AdminUser;
 use App\Groups\Admin\AdminUserFactory;
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -16,6 +14,17 @@ class GetUsersTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+    private AdminUserFactory $adminUserFactory;
+    private UserFactory $userFactory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->adminUserFactory = new AdminUserFactory();
+        $this->userFactory = new UserFactory();
+    }
+
     public function testManageUsers(): void
     {
         $this->browse(function (Browser $browser) {
@@ -24,12 +33,10 @@ class GetUsersTest extends DuskTestCase
             ;
         });
 
-        /** @var AdminUser $adminUser */
-        $adminUser = AdminUserFactory::new()
+        $adminUser = $this->adminUserFactory
             ->createOne();
 
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
         $this->browse(function (Browser $browser) use ($adminUser, $user) {

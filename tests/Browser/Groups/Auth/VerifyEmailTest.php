@@ -9,27 +9,43 @@ use App\Groups\Users\UserFactory;
 use Carbon\Carbon;
 use Illuminate\Cache\RateLimiter;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Routing\UrlGenerator;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class VerifyEmailTest extends DuskTestCase
 {
+    private UserFactory $userFactory;
+    private RateLimiter $rateLimiter;
+    private UrlGenerator $url;
+    private Carbon $carbon;
+
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userFactory = new UserFactory();
+        $this->rateLimiter = $this->app->make(RateLimiter::class);
+        $this->url = $this->app->make(UrlGenerator::class);
+        $this->carbon = new Carbon();
+    }
+
     use DatabaseMigrations;
 
     public function testVerifyEmailWhenUsedInvalidHash(): void
     {
         /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
             ->createOne();
 
-        $this->clearRateLimiter($user->id);
+        $this->rateLimiter->clear(sha1((string)$user->id));
 
         $this->browse(function (Browser $browser) use ($user) {
-            $verificationUrl = URL::temporarySignedRoute(
+            $verificationUrl = $this->url->temporarySignedRoute(
                 'verification.verify',
-                (new Carbon())->addMinute(),
+                $this->carbon->addMinute(),
                 ['id' => $user->id, 'hash' => 'invalid_hash']
             );
 
@@ -44,16 +60,16 @@ class VerifyEmailTest extends DuskTestCase
     public function testVerifyEmailWhenExpires(): void
     {
         /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
             ->createOne();
 
-        $this->clearRateLimiter($user->id);
+        $this->rateLimiter->clear(sha1((string)$user->id));
 
         $this->browse(function (Browser $browser) use ($user) {
-            $verificationUrl = URL::temporarySignedRoute(
+            $verificationUrl = $this->url->temporarySignedRoute(
                 'verification.verify',
-                (new Carbon())->subMinute(), // expires
+                $this->carbon->subMinute(), // expires
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
@@ -68,16 +84,16 @@ class VerifyEmailTest extends DuskTestCase
     public function testVerifyEmail(): void
     {
         /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
             ->createOne();
 
-        $this->clearRateLimiter($user->id);
+        $this->rateLimiter->clear(sha1((string)$user->id));
 
         $this->browse(function (Browser $browser) use ($user) {
-            $verificationUrl = URL::temporarySignedRoute(
+            $verificationUrl = $this->url->temporarySignedRoute(
                 'verification.verify',
-                (new Carbon())->addMinute(),
+                $this->carbon->addMinute(),
                 ['id' => $user->id, 'hash' => sha1($user->email)]
             );
 
@@ -87,10 +103,5 @@ class VerifyEmailTest extends DuskTestCase
                 ->assertSee(__('verification.verified'))
             ;
         });
-    }
-
-    private function clearRateLimiter(int $id): void
-    {
-        app(RateLimiter::class)->clear(sha1((string)$id));
     }
 }

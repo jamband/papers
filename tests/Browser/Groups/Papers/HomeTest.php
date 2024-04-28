@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Papers;
 
-use App\Groups\Papers\Paper;
 use App\Groups\Papers\PaperFactory;
 use App\Groups\Users\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -15,6 +14,17 @@ class HomeTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+    private PaperFactory $paperFactory;
+    private User $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->paperFactory = new PaperFactory();
+        $this->user = new User();
+    }
+
     public function testHome(): void
     {
         $this->browse(function (Browser $browser) {
@@ -23,12 +33,10 @@ class HomeTest extends DuskTestCase
             ;
         });
 
-        /** @var Paper $paper */
-        $paper = PaperFactory::new()
+        $paper = $this->paperFactory
             ->createOne();
 
-        /** @var User $user */
-        $user = User::query()
+        $user = $this->user::query()
             ->find($paper->user_id);
 
         $this->browse(function (Browser $browser) use ($user, $paper) {

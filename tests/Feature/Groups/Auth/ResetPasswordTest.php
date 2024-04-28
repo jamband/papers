@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Groups\Auth;
 
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -16,11 +16,22 @@ class ResetPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
+    private UserFactory $userFactory;
+    private UrlGenerator $url;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userFactory = new UserFactory();
+        $this->url = $this->app->make(UrlGenerator::class);
+    }
+
     public function testGuestMiddleware(): void
     {
-        $this->actingAs(UserFactory::new()->createOne())
-            ->get(route('password.reset', ['token' => 'foo']))
-            ->assertRedirect(route('home'));
+        $this->actingAs($this->userFactory->makeOne())
+            ->get($this->url->route('password.reset', ['token' => 'foo']))
+            ->assertRedirect($this->url->route('home'));
     }
 
     public function testView(): void
@@ -31,16 +42,15 @@ class ResetPasswordTest extends TestCase
 
     public function testResetPasswordFails(): void
     {
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
-        $data['token'] = Str::random(60);
-        $data['email'] = $user->email;
-        $data['password'] = 'password';
-        $data['password_confirmation'] = $data['password'];
-
-        $this->post(route('password.update'), $data)
+        $this->post($this->url->route('password.update'), [
+            'token' => Str::random(60),
+            'email' => $user->email,
+            'password' => 'new_password',
+            'password_confirmation' => 'new_password',
+        ])
             ->assertSessionHasErrors();
     }
 
@@ -48,20 +58,20 @@ class ResetPasswordTest extends TestCase
     {
         Notification::fake();
 
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
-        $data['email'] = $user->email;
-        $this->post(route('password.forgot'), $data);
+        $this->post($this->url->route('password.forgot'), [
+            'email' => $user->email,
+        ]);
 
         Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-            $data['token'] = $notification->token;
-            $data['email'] = $user->email;
-            $data['password'] = 'new_password';
-            $data['password_confirmation'] = $data['password'];
-
-            $this->post(route('password.update'), $data)
+            $this->post($this->url->route('password.update'), [
+                'token' => $notification->token,
+                'email' => $user->email,
+                'password' => 'new_password',
+                'password_confirmation' => 'new_password',
+            ])
                 ->assertSessionHasNoErrors();
 
             return true;

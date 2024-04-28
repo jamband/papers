@@ -8,29 +8,42 @@ use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
 
 class VerifyEmailTest extends TestCase
 {
     use RefreshDatabase;
 
+    private UserFactory $userFactory;
+    private UrlGenerator $url;
+    private Carbon $carbon;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userFactory = new UserFactory();
+        $this->url = $this->app->make(UrlGenerator::class);
+        $this->carbon = new Carbon();
+    }
+
     public function testAuthMiddleware(): void
     {
-        $this->get(route('verification.verify', ['id' => 1, 'hash' => 1]))
-            ->assertRedirect(route('auth.login'));
+        $this->get($this->url->route('verification.verify', ['id' => 1, 'hash' => 1]))
+            ->assertRedirect($this->url->route('auth.login'));
     }
 
     public function testSignedMiddleware(): void
     {
         /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
             ->createOne();
 
-        $verificationUrl = URL::temporarySignedRoute(
+        $verificationUrl = $this->url->temporarySignedRoute(
             'verification.verify',
-            (new Carbon())->subMinute(), // expires
+            $this->carbon->subMinute(), // expires
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
@@ -44,13 +57,13 @@ class VerifyEmailTest extends TestCase
     public function testThrottleMiddleware(): void
     {
         /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
             ->createOne();
 
-        $verificationUrl = URL::temporarySignedRoute(
+        $verificationUrl = $this->url->temporarySignedRoute(
             'verification.verify',
-            (new Carbon())->addMinutes(),
+            $this->carbon->addMinutes(),
             ['id' => $user->id, 'hash' => sha1('wrong_email')]
         );
 
@@ -62,19 +75,19 @@ class VerifyEmailTest extends TestCase
     public function testVerifyEmail(): void
     {
         /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
             ->createOne();
 
-        $verificationUrl = URL::temporarySignedRoute(
+        $verificationUrl = $this->url->temporarySignedRoute(
             'verification.verify',
-            (new Carbon())->addMinutes(),
+            $this->carbon->addMinutes(),
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
         $this->actingAs($user)
             ->get($verificationUrl)
-            ->assertRedirect(route('home'));
+            ->assertRedirect($this->url->route('home'));
 
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
     }

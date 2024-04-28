@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Groups\Auth;
 
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -15,18 +15,31 @@ class EmailVerificationNotificationTest extends TestCase
 {
     use RefreshDatabase;
 
+    private UserFactory $userFactory;
+    private UrlGenerator $url;
+    private VerifyEmail $verifyEmail;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userFactory = new UserFactory();
+        $this->url = $this->app->make(UrlGenerator::class);
+        $this->verifyEmail = $this->app->make(VerifyEmail::class);
+    }
+
     public function testAuthMiddleware(): void
     {
-        $this->post(route('verification.send'))
-            ->assertRedirect(route('auth.login'));
+        $this->post($this->url->route('verification.send'))
+            ->assertRedirect($this->url->route('auth.login'));
     }
 
     public function testThrottleMiddleware(): void
     {
         Notification::fake();
 
-        $this->actingAs(UserFactory::new()->createOne())
-            ->post(route('verification.send'))
+        $this->actingAs($this->userFactory->makeOne())
+            ->post($this->url->route('verification.send'))
             ->assertHeader('X-RATELIMIT-REMAINING', 5);
     }
 
@@ -34,9 +47,9 @@ class EmailVerificationNotificationTest extends TestCase
     {
         Notification::fake();
 
-        $this->actingAs(UserFactory::new()->createOne())
-            ->post(route('verification.send'))
-            ->assertRedirect(route('home'));
+        $this->actingAs($this->userFactory->makeOne())
+            ->post($this->url->route('verification.send'))
+            ->assertRedirect($this->url->route('home'));
 
         Notification::assertNothingSent();
     }
@@ -45,15 +58,14 @@ class EmailVerificationNotificationTest extends TestCase
     {
         Notification::fake();
 
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->unverified()
-            ->createOne();
+            ->makeOne();
 
         $this->actingAs($user)
-            ->post(route('verification.send'))
-            ->assertRedirect(route('home'));
+            ->post($this->url->route('verification.send'))
+            ->assertRedirect($this->url->route('home'));
 
-        Notification::assertSentTo($user, VerifyEmail::class);
+        Notification::assertSentTo($user, $this->verifyEmail::class);
     }
 }

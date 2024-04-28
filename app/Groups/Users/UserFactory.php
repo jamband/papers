@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+    public const PASSWORD = 'password';
+
     protected $model = User::class;
 
     protected static string|null $password;
@@ -28,7 +30,7 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => new Carbon(),
-            'password' => static::$password ??= $hash->make('password'),
+            'password' => static::$password ??= $hash->make(self::PASSWORD),
             'remember_token' => Str::random(10),
         ];
     }

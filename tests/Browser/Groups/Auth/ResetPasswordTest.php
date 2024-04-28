@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Auth;
 
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
+use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Password;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
@@ -15,10 +14,20 @@ class ResetPasswordTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+    private UserFactory $userFactory;
+    private PasswordBroker $password;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userFactory = new UserFactory();
+        $this->password = $this->app->make(PasswordBroker::class);
+    }
+
     public function testResetPasswordInvalidToken(): void
     {
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
         $this->browse(function (Browser $browser) use ($user) {
@@ -50,13 +59,12 @@ class ResetPasswordTest extends DuskTestCase
 
     public function testResetPassword(): void
     {
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
         $this->browse(function (Browser $browser) use ($user) {
             $browser->visitRoute('password.reset', [
-                'token' => Password::createToken($user),
+                'token' => $this->password->createToken($user),
                 'email' => $user->email,
             ])
                 ->type('password', 'new_password')

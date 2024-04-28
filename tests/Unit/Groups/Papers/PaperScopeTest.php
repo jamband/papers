@@ -14,18 +14,20 @@ class PaperScopeTest extends TestCase
     use RefreshDatabase;
 
     private Paper $paper;
+    private PaperFactory $paperFactory;
 
     protected function setUp(): void
     {
         parent::setup();
 
         $this->paper = new Paper();
+        $this->paperFactory = new PaperFactory();
     }
 
     public function testByUserId(): void
     {
         /** @var array<int, Paper> $papers */
-        $papers = Paperfactory::new()
+        $papers = $this->paperFactory
             ->count(3)
             ->create();
 

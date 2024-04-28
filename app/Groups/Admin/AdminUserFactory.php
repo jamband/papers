@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
  */
 class AdminUserFactory extends Factory
 {
+    public const PASSWORD = 'adminadmin';
+
     protected $model = AdminUser::class;
 
     protected static string|null $password;
@@ -28,7 +30,7 @@ class AdminUserFactory extends Factory
             'name' => 'admin',
             'email' => 'admin@example.com',
             'email_verified_at' => new Carbon(),
-            'password' => static::$password ??= $hash->make('adminadmin'),
+            'password' => static::$password ??= $hash->make(self::PASSWORD),
             'remember_token' => Str::random(10),
         ];
     }

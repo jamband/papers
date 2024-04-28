@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Site;
 
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -13,6 +12,15 @@ use Tests\DuskTestCase;
 class HomeTest extends DuskTestCase
 {
     use DatabaseMigrations;
+
+    private UserFactory $userFactory;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->userFactory = new UserFactory();
+    }
 
     public function testHome(): void
     {
@@ -32,8 +40,7 @@ class HomeTest extends DuskTestCase
 
     public function testHomeWithAuth(): void
     {
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
         $this->browse(function (Browser $browser) use ($user) {
@@ -53,8 +60,7 @@ class HomeTest extends DuskTestCase
 
     public function testLogout(): void
     {
-        /** @var User $user */
-        $user = UserFactory::new()
+        $user = $this->userFactory
             ->createOne();
 
         $this->browse(function (Browser $browser) use ($user) {

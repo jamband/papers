@@ -7,26 +7,40 @@ namespace Tests\Feature\Groups\Admin;
 use App\Groups\Admin\AdminUserFactory;
 use App\Groups\Users\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
 
 class GetUsersTest extends TestCase
 {
     use RefreshDatabase;
 
+    private AdminUserFactory $adminUserFactory;
+    private UserFactory $userFactory;
+    private UrlGenerator $url;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->adminUserFactory = new AdminUserFactory();
+        $this->userFactory = new UserFactory();
+        $this->url = $this->app->make(UrlGenerator::class);
+    }
+
     public function testAuthAdminMiddleware(): void
     {
-        $this->get(route('admin.users'))
-            ->assertRedirect(route('admin.login'));
+        $this->get($this->url->route('admin.users'))
+            ->assertRedirect($this->url->route('admin.login'));
 
-        $this->actingAs(UserFactory::new()->createOne())
-            ->get(route('admin.users'))
-            ->assertRedirect(route('admin.login'));
+        $this->actingAs($this->userFactory->makeOne())
+            ->get($this->url->route('admin.users'))
+            ->assertRedirect($this->url->route('admin.login'));
     }
 
     public function testView(): void
     {
-        $this->actingAs(AdminUserFactory::new()->createOne(), 'admin')
-            ->get(route('admin.users'))
+        $this->actingAs($this->adminUserFactory->makeOne(), 'admin')
+            ->get($this->url->route('admin.users'))
             ->assertOk();
     }
 }

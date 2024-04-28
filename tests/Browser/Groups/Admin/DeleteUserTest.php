@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Admin;
 
-use App\Groups\Admin\AdminUser;
 use App\Groups\Admin\AdminUserFactory;
-use App\Groups\Papers\Paper;
 use App\Groups\Papers\PaperFactory;
 use App\Groups\Users\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -17,18 +15,29 @@ class DeleteUserTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+    private AdminUserFactory $adminUserFactory;
+    private PaperFactory $paperFactory;
+    private User $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->adminUserFactory = new AdminUserFactory();
+        $this->paperFactory = new PaperFactory();
+        $this->user = new User();
+    }
+
     public function testDeleteUser(): void
     {
-        /** @var AdminUser $adminUser */
-        $adminUser = AdminUserFactory::new()
+        $adminUser = $this->adminUserFactory
             ->createOne();
 
-        /** @var Paper $paper */
-        $paper = PaperFactory::new()
+        $paper = $this->paperFactory
             ->createOne();
 
         /** @var User $user */
-        $user = User::query()
+        $user = $this->user::query()
             ->find($paper->user_id);
 
         $this->browse(function (Browser $browser) use ($adminUser, $user) {

@@ -10,37 +10,53 @@ use App\Groups\Papers\PaperFactory;
 use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\UrlGenerator;
 use Tests\TestCase;
 
 class DeleteUserTest extends TestCase
 {
     use RefreshDatabase;
 
+    private AdminUserFactory $adminUserFactory;
+    private UserFactory $userFactory;
+    private PaperFactory $paperFactory;
+    private User $user;
+    private UrlGenerator $url;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->adminUserFactory = new AdminUserFactory();
+        $this->userFactory = new UserFactory();
+        $this->paperFactory = new PaperFactory();
+        $this->user = new User();
+        $this->url = $this->app->make(UrlGenerator::class);
+    }
+
     public function testAuthAdminMiddleware(): void
     {
-        $this->post(route('admin.user.delete', ['id' => 1]))
-            ->assertRedirect(route('admin.login'));
+        $this->post($this->url->route('admin.user.delete', ['id' => 1]))
+            ->assertRedirect($this->url->route('admin.login'));
 
-        $this->actingAs(UserFactory::new()->createOne())
-            ->post(route('admin.user.delete', ['id' => 1]))
-            ->assertRedirect(route('admin.login'));
+        $this->actingAs($this->userFactory->makeOne())
+            ->post($this->url->route('admin.user.delete', ['id' => 1]))
+            ->assertRedirect($this->url->route('admin.login'));
     }
 
     public function testDeleteUser(): void
     {
-        /** @var User $user */
-        $user = UserFactory::new()
+        $paper = $this->paperFactory
             ->createOne();
 
-        PaperFactory::new()
-            ->createOne(['user_id' => $user->id]);
+        $user = $this->user->find($paper->user_id);
 
         $this->assertDatabaseCount(User::class, 1);
         $this->assertDatabaseCount(Paper::class, 1);
 
-        $this->actingAs(AdminUserFactory::new()->createOne(), 'admin')
-            ->post(route('admin.user.delete', [$user]))
-            ->assertRedirect(route('admin.users'));
+        $this->actingAs($this->adminUserFactory->makeOne(), 'admin')
+            ->post($this->url->route('admin.user.delete', [$user]))
+            ->assertRedirect($this->url->route('admin.users'));
 
         $this->assertDatabaseCount(User::class, 0);
         $this->assertDatabaseCount(Paper::class, 0);
