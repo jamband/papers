@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Development;
 
-use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\Application;
 
 class Init extends Command
 {
@@ -15,32 +15,33 @@ class Init extends Command
 
     protected $description = 'Prepare the project for the development environment';
 
-    public function handle(
-        Filesystem $file,
-        Repository $config,
-    ): int {
+    public function handle(Filesystem $file): int
+    {
+        /** @var Application $app */
+        $app = $this->laravel;
+
         $file->copy('.env.example', '.env');
         $file->copy('.env.dusk.local.example', '.env.dusk.local');
 
-        $file->put($this->laravel->databasePath('app.db'), '');
-        $file->put($this->laravel->storagePath('framework/testing/app.db'), '');
+        $file->put($app->databasePath('app.db'), '');
+        $file->put($app->storagePath('framework/testing/app.db'), '');
 
-        $envFilename = $this->laravel->environmentFilePath();
+        $envFilename = $app->environmentFilePath();
 
         $generateAppKey = fn () => 'base64:'.base64_encode(
-            Encrypter::generateKey($config->get('app.cipher'))
+            Encrypter::generateKey($app['config']['app']['cipher']),
         );
 
         // .env
         $data = $file->get($envFilename);
         $data = preg_replace('/__app_key__/', $generateAppKey(), $data);
-        $data = preg_replace('/__database__/', $this->laravel->databasePath('app.db'), $data);
+        $data = preg_replace('/__database__/', $app->databasePath('app.db'), $data);
         $file->put($envFilename, $data);
 
         // .env.dusk.local
         $data = $file->get($envFilename.'.dusk.local');
         $data = preg_replace('/__app_key__/', $generateAppKey(), $data);
-        $data = preg_replace('/__database__/', $this->laravel->storagePath('framework/testing/app.db'), $data);
+        $data = preg_replace('/__database__/', $app->storagePath('framework/testing/app.db'), $data);
         $file->put($envFilename.'.dusk.local', $data);
 
         $this->call('migrate', ['--force' => true]);

@@ -19,11 +19,8 @@ class CreateAdminUser extends Command
 
     protected $description = 'Create an admin user';
 
-    public function handle(
-        AdminUser $adminUser,
-        HashManager $hash,
-        Carbon $carbon,
-    ): int {
+    public function handle(AdminUser $adminUser, HashManager $hash, Carbon $carbon): int
+    {
         /** @var AdminUser $query */
         $query = $adminUser::query();
 
@@ -33,7 +30,6 @@ class CreateAdminUser extends Command
             return self::FAILURE;
         }
 
-        $adminUser = new AdminUser();
         $adminUser->name = self::ADMIN_USER_NAME;
         $adminUser->email = self::ADMIN_USER_EMAIL;
         $adminUser->email_verified_at = $carbon::now();

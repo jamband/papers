@@ -28,9 +28,8 @@ class Clean extends Command
         'storage/framework/testing/*',
     ];
 
-    public function handle(
-        PendingProcess $process,
-    ): int {
+    public function handle(PendingProcess $process): int
+    {
         $this->call('dusk:purge');
         $this->call('optimize:clear');
 
