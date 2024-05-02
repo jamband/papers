@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Groups\Auth;
 
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -36,7 +35,6 @@ class VerifyEmailTest extends TestCase
 
     public function testSignedMiddleware(): void
     {
-        /** @var User $user */
         $user = $this->userFactory
             ->unverified()
             ->createOne();
@@ -56,7 +54,6 @@ class VerifyEmailTest extends TestCase
 
     public function testThrottleMiddleware(): void
     {
-        /** @var User $user */
         $user = $this->userFactory
             ->unverified()
             ->createOne();
@@ -74,7 +71,6 @@ class VerifyEmailTest extends TestCase
 
     public function testVerifyEmail(): void
     {
-        /** @var User $user */
         $user = $this->userFactory
             ->unverified()
             ->createOne();

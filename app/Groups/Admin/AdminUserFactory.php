@@ -38,6 +38,9 @@ class AdminUserFactory extends Factory
         ];
     }
 
+    /**
+     * @return Factory<AdminUser>
+     */
     public function unverified(): Factory
     {
         return $this->state(fn () => ['email_verified_at' => null]);

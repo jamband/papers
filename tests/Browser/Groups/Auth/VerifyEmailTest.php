@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Browser\Groups\Auth;
 
-use App\Groups\Users\User;
 use App\Groups\Users\UserFactory;
 use Carbon\Carbon;
 use Illuminate\Cache\RateLimiter;
@@ -35,7 +34,6 @@ class VerifyEmailTest extends DuskTestCase
 
     public function testVerifyEmailWhenUsedInvalidHash(): void
     {
-        /** @var User $user */
         $user = $this->userFactory
             ->unverified()
             ->createOne();
@@ -59,7 +57,6 @@ class VerifyEmailTest extends DuskTestCase
 
     public function testVerifyEmailWhenExpires(): void
     {
-        /** @var User $user */
         $user = $this->userFactory
             ->unverified()
             ->createOne();
@@ -83,7 +80,6 @@ class VerifyEmailTest extends DuskTestCase
 
     public function testVerifyEmail(): void
     {
-        /** @var User $user */
         $user = $this->userFactory
             ->unverified()
             ->createOne();
