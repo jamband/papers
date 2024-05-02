@@ -5,7 +5,6 @@ declare(strict_types=1);
 use App\Groups\Users\User;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\RedirectIfAuthenticated;
-use Illuminate\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -18,9 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         using: function () {
             /** @var Application $app */
-            $app = Container::getInstance()->make(Application::class);
+            $app = Application::getInstance()->make(Application::class);
             /** @var RouteRegistrar $router */
-            $router = Container::getInstance()->make(RouteRegistrar::class);
+            $router = Application::getInstance()->make(RouteRegistrar::class);
 
             $groups = [
                 'Admin',
@@ -46,7 +45,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (InvalidSignatureException $e, Request $request) {
             /** @var ResponseFactory $response */
-            $response = Container::getInstance()->make(ResponseFactory::class);
+            $response = Application::getInstance()->make(ResponseFactory::class);
 
             /** @var User $user */
             $user = $request->user();
