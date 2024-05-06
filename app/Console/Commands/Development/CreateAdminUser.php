@@ -32,7 +32,7 @@ class CreateAdminUser extends Command
 
         $adminUser->name = self::ADMIN_USER_NAME;
         $adminUser->email = self::ADMIN_USER_EMAIL;
-        $adminUser->email_verified_at = $carbon::now();
+        $adminUser->email_verified_at = $carbon;
         $adminUser->password = $hash->make(self::ADMIN_USER_PASSWORD);
         $adminUser->save();
 

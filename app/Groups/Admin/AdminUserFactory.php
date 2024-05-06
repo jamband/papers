@@ -23,16 +23,14 @@ class AdminUserFactory extends Factory
 
     public function definition(): array
     {
-        /** @var Carbon $carbon */
-        $carbon = Container::getInstance()->make(Carbon::class);
-
+        $carbon = new Carbon();
         /** @var HashManager $hash */
         $hash = Container::getInstance()->make(HashManager::class);
 
         return [
             'name' => 'admin',
             'email' => 'admin@example.com',
-            'email_verified_at' => $carbon::now(),
+            'email_verified_at' => $carbon,
             'password' => static::$password ??= $hash->make(self::PASSWORD),
             'remember_token' => Str::random(10),
         ];

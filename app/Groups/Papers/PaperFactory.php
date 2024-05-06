@@ -16,8 +16,10 @@ class PaperFactory extends Factory
 
     public function definition(): array
     {
+        $userFactory = new UserFactory();
+
         return [
-            'user_id' => UserFactory::new(),
+            'user_id' => $userFactory,
             'title' => $this->faker->sentence(3),
             'body' => $this->faker->paragraph(),
         ];
