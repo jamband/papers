@@ -29,7 +29,7 @@ class Init extends Command
         $envFilename = $app->environmentFilePath();
 
         $generateAppKey = fn () => 'base64:'.base64_encode(
-            Encrypter::generateKey($app['config']['app']['cipher']),
+            Encrypter::generateKey($app['config']['app.cipher']),
         );
 
         // .env
