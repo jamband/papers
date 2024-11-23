@@ -4,7 +4,7 @@ Papers is a project created as a documentation for authentication with Laravel.
 
 ## Requirements for development environment
 
-- PHP >= 8.2
+- PHP >= 8.3
 - Composer >= 2.2.0
 - SQLite 3
 - Node.js >= 20.x

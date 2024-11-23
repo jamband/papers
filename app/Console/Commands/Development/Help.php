@@ -15,7 +15,7 @@ class Help extends Command
     public function handle(): int
     {
         $this->table(['Requirements'], [
-            ['PHP', '>= 8.2'],
+            ['PHP', '>= 8.3'],
             ['Composer', '>= 2.2.0'],
             ['SQLite', '3'],
             ['Node.js', '>= 20.x'],

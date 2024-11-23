@@ -1,6 +1,6 @@
 {
   "require": {
-    "php": "^8.2",
+    "php": "^8.3",
     "laravel/framework": "^11.33"
   },
   "require-dev": {
