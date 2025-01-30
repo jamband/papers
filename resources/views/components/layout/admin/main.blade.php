@@ -10,7 +10,7 @@
 <body>
 <div class="flex flex-col min-h-screen">
   <x-layout.admin.header />
-  <main class="flex-grow container mx-auto pt-28 pb-10">
+  <main class="flex-grow w-full md:max-w-3xl md:mx-auto px-6 pt-28 pb-10">
     {{ $slot }}
   </main>
   <x-layout.admin.footer />

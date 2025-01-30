@@ -6,7 +6,7 @@
     </div>
   @else
     <nav class="text-sm" aria-label="Footer navigation">
-      <x-link.external href="https://github.com/jamband/papers" class="p-3 no-underline hover:bg-gray-200 rounded">GitHub</x-link.external>
+      <x-link.external href="https://github.com/jamband/papers" class="px-4 py-1.5 no-underline active:bg-gray-200 active:text-gray-600 hover:bg-gray-200 hover:text-gray-600 rounded">GitHub</x-link.external>
     </nav>
   @endauth
 </footer>
