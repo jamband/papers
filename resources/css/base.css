@@ -1,0 +1,40 @@
+@layer base {
+  html,
+  body {
+    @apply text-gray-500 text-base;
+  }
+
+  h1 {
+    @apply mb-10 text-gray-600 text-5xl font-bold;
+  }
+
+  h2 {
+    @apply text-4xl text-gray-600 font-semibold;
+  }
+
+  a {
+    @apply underline decoration-[0.05em] underline-offset-[0.25em];
+  }
+
+  p {
+    @apply mb-5;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  input[type="email"],
+  input[type="password"],
+  input[type="text"] {
+    @apply px-4 py-2 bg-gray-100 border border-gray-200 rounded w-full md:w-1/2;
+  }
+
+  textarea {
+    @apply px-3 py-1 min-h-24 bg-gray-100 border border-gray-200 rounded w-full;
+  }
+
+  label {
+    @apply block py-0.5;
+  }
+}

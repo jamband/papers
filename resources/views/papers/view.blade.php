@@ -4,7 +4,7 @@
     <div>{{ $paper->body }}</div>
     <div class="mt-3">Created at: {{ $paper->created_at }}</div>
     <div>Updated at: {{ $paper->updated_at }}</div>
-    <div class="flex gap-3">
+    <div class="mt-1 flex gap-3">
       <a href="{{ route('paper.update', [$paper]) }}">Update</a>
       <form action="{{ route('paper.delete', [$paper]) }}" method="POST">
         @csrf

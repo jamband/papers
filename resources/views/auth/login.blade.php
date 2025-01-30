@@ -16,19 +16,19 @@
     <div class="mt-6">
       <label for="remember_me">
         <input type="checkbox" id="remember_me" name="remember">
-        <span class="ml-1 text-sm">Remember me</span>
+        <span class="ml-1">Remember me</span>
       </label>
     </div>
     <x-button class="mt-6">Login</x-button>
     <span class="mx-1">or</span>
     <a href="{{ route('password.forgot') }}">Forgot password?</a>
   </form>
-  <hr class="mt-10"/>
+  <hr class="mt-10 text-gray-300" />
   <div class="mt-10">
     <a href="{{ route('admin.login') }}">Login as administrator</a>
   </div>
-  <p class="mt-2 text-sm text-amber-500">
-    <x-icon.light-bulb class="inline w-4 h-4 align-[-0.125em]" />
+  <p class="mt-2 text-amber-500">
+    <x-icon.light-bulb class="inline w-4 h-4 align-[-0.15rem]" />
     This link usually does not exist.
     Displayed for development environment.
   </p>
