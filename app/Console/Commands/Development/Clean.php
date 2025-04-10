@@ -13,7 +13,8 @@ class Clean extends Command
 
     protected $description = 'Clean up development environment';
 
-    private const FILES = [
+    /** @var array<int, string> */
+    private const array FILES = [
         // directories
         '.phpunit.cache',
         'node_modules',

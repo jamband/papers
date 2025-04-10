@@ -23,7 +23,7 @@ class LoginRequest extends FormRequest
     private RateLimiter $rateLimiter;
     private Dispatcher $event;
 
-    private const MAX_ATTEMPTS = 5;
+    private const int MAX_ATTEMPTS = 5;
 
     public function authorize(): bool
     {
