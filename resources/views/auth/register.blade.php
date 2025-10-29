@@ -25,7 +25,7 @@
   </form>
   <hr class="mt-8 text-gray-300" />
   <p class="mt-8">
-    <x-icon.light-bulb class="inline w-4 h-4 align-[-0.15rem]" />
+    <x-icon.light-bulb class="inline w-5 h-5 align-[-0.2rem]" />
     If you have already registered as a user, please
     <a href="{{ route('auth.login') }}">Login from this link</a>.
   </p>

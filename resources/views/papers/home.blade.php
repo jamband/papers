@@ -1,7 +1,7 @@
 @php /** @var array<int, App\Groups\Papers\Paper> $papers */ @endphp
 <x-layout.main title="">
   <h1>Papers</h1>
-  <x-icon.pencil class="inline w-4 h-4 align-[-0.15rem]" />
+  <x-icon.pencil class="inline w-5 h-5 align-[-0.25rem]" />
   <a href="{{ route('paper.create') }}">Create new paper</a>
   <hr class="mt-10 text-gray-300" />
   @foreach ($papers as $paper)
@@ -9,7 +9,7 @@
       <h2>{{ $paper->title }}</h2>
       <div class="mt-3">{{ $paper->body }}</div>
       <div class="mt-3 text-sm">
-        <x-icon.clock class="inline w-4 h-4 align-[-0.15rem]" />
+        <x-icon.clock class="inline w-5 h-5 align-[-0.25rem]" />
         {{ $paper->created_at }}
       </div>
       <div class="mt-1 flex gap-3">
