@@ -32,6 +32,7 @@ class LogoutTest extends DuskTestCase
                 ->visitRoute('admin.home')
 
                 ->press('Logout')
+                ->waitForRoute('home')
                 ->assertRouteIs('home')
                 ->assertSee('Logged out successfully.')
                 ->assertSeeLink('Login')

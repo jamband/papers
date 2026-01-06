@@ -71,6 +71,7 @@ class HomeTest extends DuskTestCase
                 ->assertDontSeeLink('Register')
 
                 ->press('@logout-button')
+                ->waitForRoute('home')
                 ->assertRouteIs('home')
                 ->assertSeeLink('Login')
                 ->assertSeeLink('Register')

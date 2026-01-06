@@ -36,10 +36,12 @@ class DeleteAccountTest extends DuskTestCase
                 ->assertRouteIs('password.confirm')
 
                 ->press('Confirm')
+                ->waitForRoute('password.confirm')
                 ->assertSee(__('auth.password'))
 
                 ->type('password', 'password')
                 ->press('Confirm')
+                ->waitForRoute('auth.delete')
                 ->assertRouteIs('auth.delete')
                 ->assertSeeIn('h1', 'Delete your account')
 

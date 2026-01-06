@@ -40,18 +40,27 @@ class ResetPasswordTest extends DuskTestCase
 
                 ->clear('email')
                 ->press('Reset Password')
+                ->waitForRoute('password.reset', [
+                    'token' => 'wrong_token',
+                ])
                 ->assertSee(__('validation.required', ['attribute' => 'email']))
                 ->assertSee(__('validation.required', ['attribute' => 'password']))
 
                 ->type('password', 'new_password')
                 ->type('password_confirmation', 'wrong_new_password')
                 ->press('Reset Password')
+                ->waitForRoute('password.reset', [
+                    'token' => 'wrong_token',
+                ])
                 ->assertSee(__('validation.confirmed', ['attribute' => 'password']))
 
                 ->type('email', $user->email)
                 ->type('password', 'new_password')
                 ->type('password_confirmation', 'new_password')
                 ->press('Reset Password')
+                ->waitForRoute('password.reset', [
+                    'token' => 'wrong_token',
+                ])
                 ->assertSee(__('passwords.token'))
             ;
         });
@@ -70,12 +79,14 @@ class ResetPasswordTest extends DuskTestCase
                 ->type('password', 'new_password')
                 ->type('password_confirmation', 'new_password')
                 ->press('Reset Password')
+                ->waitForRoute('auth.login')
                 ->assertRouteIs('auth.login')
                 ->assertSee(__('passwords.reset'))
 
                 ->type('email', $user->email)
                 ->type('password', 'new_password')
                 ->press('Login')
+                ->waitForRoute('home')
                 ->assertRouteIs('home')
             ;
         });

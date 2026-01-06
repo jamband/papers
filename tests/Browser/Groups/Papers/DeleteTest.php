@@ -40,6 +40,8 @@ class DeleteTest extends DuskTestCase
 
                 ->press('@delete-paper-button')
                 ->acceptDialog()
+                ->waitForRoute('paper.home')
+                ->assertRouteIs('paper.home')
                 ->assertDontSee($paper->title)
             ;
         });

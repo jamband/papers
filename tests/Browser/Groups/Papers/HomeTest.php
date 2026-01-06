@@ -62,10 +62,12 @@ class HomeTest extends DuskTestCase
                 ->press('@delete-paper-button')
                 ->assertDialogOpened('Are you sure?')
                 ->dismissDialog()
+                ->waitForRoute('paper.home')
                 ->assertSeeIn('h2', $paper->title)
 
                 ->press('@delete-paper-button')
                 ->acceptDialog()
+                ->waitForRoute('paper.home')
                 ->assertDontSee($paper->title)
             ;
         });

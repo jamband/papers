@@ -32,19 +32,23 @@ class ForgotPasswordTest extends DuskTestCase
                 ->assertSeeIn('h1', 'Forgot password')
 
                 ->press('Send Email')
+                ->waitForRoute('password.forgot')
                 ->assertSee(__('validation.required', ['attribute' => 'email']))
 
                 ->type('email', 'foo@example.com')
                 ->press('Send Email')
+                ->waitForRoute('password.forgot')
                 ->assertSee(__('passwords.user'))
 
                 ->type('email', $user->email)
                 ->press('Send Email')
+                ->waitForRoute('password.forgot')
                 ->assertRouteIs('password.forgot')
                 ->assertSee(__('passwords.sent'))
 
                 ->type('email', $user->email)
                 ->press('Send Email')
+                ->waitForRoute('password.forgot')
                 ->assertSee(__('passwords.throttled'))
             ;
         });

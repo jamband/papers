@@ -36,17 +36,20 @@ class LoginTest extends DuskTestCase
                 ->back()
 
                 ->press('Login')
+                ->waitForRoute('auth.login')
                 ->assertSee(__('validation.required', ['attribute' => 'email']))
                 ->assertSee(__('validation.required', ['attribute' => 'password']))
 
                 ->type('email', 'foo@exmaple.com')
                 ->type('password', 'wrong_password')
                 ->press('Login')
+                ->waitForRoute('auth.login')
                 ->assertSee(__('auth.failed'))
 
                 ->type('email', $user->email)
                 ->type('password', 'password')
                 ->press('Login')
+                ->waitForRoute('home')
                 ->assertRouteIs('home')
                 ->assertSee('Logged in.')
             ;

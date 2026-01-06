@@ -35,17 +35,20 @@ class RegisterTest extends DuskTestCase
                 ->back()
 
                 ->press('Register')
+                ->waitForRoute('auth.register')
                 ->assertSee(__('validation.required', ['attribute' => 'name']))
                 ->assertSee(__('validation.required', ['attribute' => 'email']))
                 ->assertSee(__('validation.required', ['attribute' => 'password']))
 
                 ->type('email', $user->email)
                 ->press('Register')
+                ->waitForRoute('auth.register')
                 ->assertSee(__('validation.unique', ['attribute' => 'email']))
 
                 ->type('password', 'new_user_password')
                 ->type('password_confirmation', 'wrong_password')
                 ->press('Register')
+                ->waitForRoute('auth.register')
                 ->assertSee(__('validation.confirmed', ['attribute' => 'password']))
 
                 ->type('name', 'new_user')
@@ -53,6 +56,7 @@ class RegisterTest extends DuskTestCase
                 ->type('password', 'new_user_password')
                 ->type('password_confirmation', 'new_user_password')
                 ->press('Register')
+                ->waitForRoute('verification.notice')
                 ->assertRouteIs('verification.notice')
             ;
         });

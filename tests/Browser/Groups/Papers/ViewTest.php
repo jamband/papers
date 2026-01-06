@@ -58,9 +58,11 @@ class ViewTest extends DuskTestCase
                 ->press('Delete')
                 ->assertDialogOpened('Are you sure?')
                 ->dismissDialog()
+                ->waitForRoute('paper.view', [$paper])
 
                 ->press('Delete')
                 ->acceptDialog()
+                ->waitForRoute('paper.home')
                 ->assertRouteIs('paper.home')
                 ->assertDontSee($paper->title)
             ;

@@ -32,17 +32,20 @@ class LoginTest extends DuskTestCase
                 ->assertSeeIn('h1', 'Login as administrator')
 
                 ->press('Login')
+                ->waitForRoute('admin.login')
                 ->assertSee(__('validation.required', ['attribute' => 'email']))
                 ->assertSee(__('validation.required', ['attribute' => 'password']))
 
                 ->type('email', 'foo@example.com')
                 ->type('password', 'wrong_password')
                 ->press('Login')
+                ->waitForRoute('admin.login')
                 ->assertSee(__('auth.failed'))
 
                 ->type('email', $adminUser->email)
                 ->type('password', str_repeat($adminUser->name, 2))
                 ->press('Login')
+                ->waitForRoute('admin.home')
                 ->assertRouteIs('admin.home')
                 ->assertSee('Logged in successfully.')
             ;

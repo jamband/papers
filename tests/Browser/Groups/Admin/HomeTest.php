@@ -40,8 +40,10 @@ class HomeTest extends DuskTestCase
                 ->clickLink('Users')
                 ->assertRouteIs('admin.users')
                 ->back()
+                ->waitForRoute('admin.home')
 
                 ->press('Logout')
+                ->waitForRoute('home')
                 ->assertRouteIs('home')
                 ->assertSeeLink('Login')
             ;

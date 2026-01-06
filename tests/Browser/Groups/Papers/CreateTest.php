@@ -39,12 +39,14 @@ class CreateTest extends DuskTestCase
                 ->assertSeeIn('h1', 'Create new paper')
 
                 ->press('@create-paper-button')
+                ->waitForRoute('paper.create')
                 ->assertSee(__('validation.required', ['attribute' => 'title']))
                 ->assertSee(__('validation.required', ['attribute' => 'body']))
 
                 ->type('title', 'title1')
                 ->type('body', 'body1')
                 ->press('@create-paper-button')
+                ->waitForRoute('paper.view', ['id' => 1])
                 ->assertRouteIs('paper.view', ['id' => 1])
                 ->assertSee('title1')
                 ->assertSee('body1')
