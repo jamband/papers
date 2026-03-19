@@ -16,8 +16,8 @@ class PaperTest extends TestCase
     private PaperFactory $paperFactory;
     private Carbon $carbon;
 
-    private const CREATED_AT_FORMAT = 'F jS Y, g:i a';
-    private const UPDATED_AT_FORMAT = self::CREATED_AT_FORMAT;
+    private const string CREATED_AT_FORMAT = 'F jS Y, g:i a';
+    private const string UPDATED_AT_FORMAT = self::CREATED_AT_FORMAT;
 
     protected function setUp(): void
     {

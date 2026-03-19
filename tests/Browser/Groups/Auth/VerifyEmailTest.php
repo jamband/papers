@@ -19,7 +19,6 @@ class VerifyEmailTest extends DuskTestCase
     private UrlGenerator $url;
     private Carbon $carbon;
 
-
     protected function setUp(): void
     {
         parent::setUp();
