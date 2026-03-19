@@ -7,18 +7,18 @@ namespace App\Groups\Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class EmailVerificationPrompt extends Controller
+#[Middleware('auth')]
+readonly class EmailVerificationPrompt
 {
     public function __construct(
-        private readonly Redirector $redirect,
-        private readonly Factory $view,
+        private Redirector $redirect,
+        private Factory $view,
     ) {
-        $this->middleware('auth');
     }
 
     public function __invoke(Request $request): RedirectResponse|View

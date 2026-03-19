@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Groups\Papers;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class CreatePaperView extends Controller
+#[Middleware('verified')]
+#[Middleware('auth')]
+readonly class CreatePaperView
 {
     public function __construct(
-        private readonly Factory $view
+        private Factory $view
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth');
     }
 
     public function __invoke(): View

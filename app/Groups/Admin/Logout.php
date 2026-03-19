@@ -7,17 +7,17 @@ namespace App\Groups\Admin;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class Logout extends Controller
+#[Middleware('verified')]
+#[Middleware('auth:admin')]
+readonly class Logout
 {
     public function __construct(
-        private readonly AuthManager $auth,
-        private readonly Redirector $redirect,
+        private AuthManager $auth,
+        private Redirector $redirect,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth:admin');
     }
 
     public function __invoke(Request $request): RedirectResponse

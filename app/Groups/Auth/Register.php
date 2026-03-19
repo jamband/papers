@@ -10,19 +10,19 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Hashing\HashManager;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class Register extends Controller
+#[Middleware('guest')]
+readonly class Register
 {
     public function __construct(
-        private readonly User $user,
-        private readonly HashManager $hash,
-        private readonly AuthManager $auth,
-        private readonly Dispatcher $event,
-        private readonly Redirector $redirect,
+        private User $user,
+        private HashManager $hash,
+        private AuthManager $auth,
+        private Dispatcher $event,
+        private Redirector $redirect,
     ) {
-        $this->middleware('guest');
     }
 
     public function __invoke(RegisterRequest $request): RedirectResponse

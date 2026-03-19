@@ -9,18 +9,18 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class VerifyEmail extends Controller
+#[Middleware('auth')]
+#[Middleware('signed')]
+#[Middleware('throttle:6,1')]
+readonly class VerifyEmail
 {
     public function __construct(
-        private readonly Redirector $redirect,
-        private readonly Dispatcher $event,
+        private Redirector $redirect,
+        private Dispatcher $event,
     ) {
-        $this->middleware('auth');
-        $this->middleware('signed');
-        $this->middleware('throttle:6,1');
     }
 
     public function __invoke(EmailVerificationRequest $request): RedirectResponse

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Groups\Auth;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class ConfirmPasswordView extends Controller
+#[Middleware('auth')]
+readonly class ConfirmPasswordView
 {
     public function __construct(
-        private readonly Factory $view,
+        private Factory $view,
     ) {
-        $this->middleware('auth');
     }
 
     public function __invoke(): View

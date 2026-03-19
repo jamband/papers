@@ -6,18 +6,18 @@ namespace App\Console\Commands\Development;
 
 use App\Groups\Admin\AdminUser;
 use Carbon\Carbon;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Hashing\HashManager;
 
+#[Signature('dev:create-admin-user')]
+#[Description('Create an admin user')]
 class CreateAdminUser extends Command
 {
     private const string ADMIN_USER_NAME = 'admin';
     private const string ADMIN_USER_EMAIL = 'admin@example.com';
     private const string ADMIN_USER_PASSWORD = 'adminadmin';
-
-    protected $signature = 'dev:create-admin-user';
-
-    protected $description = 'Create an admin user';
 
     public function handle(AdminUser $adminUser, HashManager $hash, Carbon $carbon): int
     {

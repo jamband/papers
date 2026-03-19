@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace App\Groups\Admin;
 
 use App\Groups\Users\User;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class GetUsers extends Controller
+#[Middleware('auth:admin')]
+readonly class GetUsers
 {
     public function __construct(
-        private readonly User $user,
-        private readonly Factory $view,
+        private User $user,
+        private Factory $view,
     ) {
-        $this->middleware('auth:admin');
     }
 
     public function __invoke(): View

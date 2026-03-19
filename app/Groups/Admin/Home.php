@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Groups\Admin;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class Home extends Controller
+#[Middleware('verified')]
+#[Middleware('auth:admin')]
+readonly class Home
 {
     public function __construct(
-        private readonly Factory $view,
+        private Factory $view,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth:admin');
     }
 
     public function __invoke(): View

@@ -6,18 +6,18 @@ namespace App\Groups\Papers;
 
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class UpdatePaper extends Controller
+#[Middleware('verified')]
+#[Middleware('auth')]
+readonly class UpdatePaper
 {
     public function __construct(
-        private readonly Paper $paper,
-        private readonly AuthManager $auth,
-        private readonly Redirector $redirect,
+        private Paper $paper,
+        private AuthManager $auth,
+        private Redirector $redirect,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth');
     }
 
     public function __invoke(UpdateRequest $request, int $id): RedirectResponse

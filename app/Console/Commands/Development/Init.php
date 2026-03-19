@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Development;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Application;
 
+#[Signature('dev:init')]
+#[Description('Prepare the project for the development environment')]
 class Init extends Command
 {
-    protected $signature = 'dev:init';
-
-    protected $description = 'Prepare the project for the development environment';
-
     public function handle(Filesystem $file): int
     {
         /** @var Application $app */

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Development;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Process\PendingProcess;
 
+#[Signature('dev:clean')]
+#[Description('Clean up development environment')]
 class Clean extends Command
 {
-    protected $signature = 'dev:clean';
-
-    protected $description = 'Clean up development environment';
-
     /** @var array<int, string> */
     private const array FILES = [
         // directories

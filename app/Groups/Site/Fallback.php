@@ -6,14 +6,13 @@ namespace App\Groups\Site;
 
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Routing\ResponseFactory;
 
-class Fallback extends Controller
+readonly class Fallback
 {
     public function __construct(
-        private readonly AuthManager $auth,
-        private readonly ResponseFactory $response,
+        private AuthManager $auth,
+        private ResponseFactory $response,
     ) {
     }
 

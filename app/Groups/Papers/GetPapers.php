@@ -6,19 +6,19 @@ namespace App\Groups\Papers;
 
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class GetPapers extends Controller
+#[Middleware('verified')]
+#[Middleware('auth')]
+readonly class GetPapers
 {
     public function __construct(
-        private readonly Paper $paper,
-        private readonly Factory $view,
-        private readonly AuthManager $auth,
+        private Paper $paper,
+        private Factory $view,
+        private AuthManager $auth,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth');
     }
 
     public function __invoke(Request $request): View

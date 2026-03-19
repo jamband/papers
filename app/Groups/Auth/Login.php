@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Groups\Auth;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class Login extends Controller
+#[Middleware('guest')]
+readonly class Login
 {
     public function __construct(
-        private readonly Redirector $redirect,
+        private Redirector $redirect,
     ) {
-        $this->middleware('guest');
     }
 
     public function __invoke(LoginRequest $request): RedirectResponse

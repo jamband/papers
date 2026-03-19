@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Groups\Auth;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class DeleteAccountView extends Controller
+#[Middleware('verified')]
+#[Middleware('auth')]
+#[Middleware('password.confirm')]
+readonly class DeleteAccountView
 {
     public function __construct(
-        private readonly Factory $view,
+        private Factory $view,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth');
-        $this->middleware('password.confirm');
     }
 
     public function __invoke(): View

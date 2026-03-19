@@ -7,16 +7,16 @@ namespace App\Groups\Auth;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class Logout extends Controller
+#[Middleware('auth')]
+readonly class Logout
 {
     public function __construct(
-        private readonly AuthManager $auth,
-        private readonly Redirector $redirect,
+        private AuthManager $auth,
+        private Redirector $redirect,
     ) {
-        $this->middleware('auth');
     }
 
     public function __invoke(Request $request): RedirectResponse

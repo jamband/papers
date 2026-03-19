@@ -6,16 +6,16 @@ namespace App\Groups\Auth;
 
 use Illuminate\Auth\Passwords\PasswordBroker;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class ForgotPassword extends Controller
+#[Middleware('guest')]
+readonly class ForgotPassword
 {
     public function __construct(
-        private readonly PasswordBroker $password,
-        private readonly Redirector $redirect,
+        private PasswordBroker $password,
+        private Redirector $redirect,
     ) {
-        $this->middleware('guest');
     }
 
     public function __invoke(ForgotPasswordRequest $request): RedirectResponse

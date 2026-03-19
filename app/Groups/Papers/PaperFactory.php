@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Groups\Papers;
 
 use App\Groups\Users\UserFactory;
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory<Paper>
  */
+#[UseModel(Paper::class)]
 class PaperFactory extends Factory
 {
-    protected $model = Paper::class;
-
     public function definition(): array
     {
         $userFactory = new UserFactory();

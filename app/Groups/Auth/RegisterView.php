@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Groups\Auth;
 
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class RegisterView extends Controller
+#[Middleware('guest')]
+readonly class RegisterView
 {
     public function __construct(
-        private readonly Factory $view,
+        private Factory $view,
     ) {
-        $this->middleware('guest');
     }
 
     public function __invoke(): View

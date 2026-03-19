@@ -8,19 +8,19 @@ use App\Groups\Users\User;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class DeleteAccount extends Controller
+#[Middleware('verified')]
+#[Middleware('auth')]
+#[Middleware('password.confirm')]
+readonly class DeleteAccount
 {
     public function __construct(
-        private readonly AuthManager $auth,
-        private readonly User $user,
-        private readonly Redirector $redirect,
+        private AuthManager $auth,
+        private User $user,
+        private Redirector $redirect,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth');
-        $this->middleware('password.confirm');
     }
 
     public function __invoke(Request $request): RedirectResponse

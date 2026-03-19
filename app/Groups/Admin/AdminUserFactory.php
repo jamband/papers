@@ -6,6 +6,7 @@ namespace App\Groups\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Factories\Attributes\UseModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Hashing\HashManager;
 use Illuminate\Support\Str;
@@ -13,11 +14,10 @@ use Illuminate\Support\Str;
 /**
  * @extends Factory<AdminUser>
  */
+#[UseModel(AdminUser::class)]
 class AdminUserFactory extends Factory
 {
     public const string PASSWORD = 'adminadmin';
-
-    protected $model = AdminUser::class;
 
     protected static string|null $password;
 

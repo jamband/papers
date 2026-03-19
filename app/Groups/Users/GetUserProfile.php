@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Groups\Users;
 
 use Illuminate\Auth\AuthManager;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\View\Factory;
 use Illuminate\View\View;
 
-class GetUserProfile extends Controller
+#[Middleware('verified')]
+#[Middleware('auth')]
+readonly class GetUserProfile
 {
     public function __construct(
-        private readonly AuthManager $auth,
-        private readonly Factory $view,
+        private AuthManager $auth,
+        private Factory $view,
     ) {
-        $this->middleware('verified');
-        $this->middleware('auth');
     }
 
     public function __invoke(): View

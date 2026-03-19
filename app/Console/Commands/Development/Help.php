@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Development;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 
+#[Signature('dev:help')]
+#[Description('Help for the development environment')]
 class Help extends Command
 {
-    protected $signature = 'dev:help';
-
-    protected $description = 'Help for the development environment';
-
     public function handle(): int
     {
         $this->table(['Requirements'], [

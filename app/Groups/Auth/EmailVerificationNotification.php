@@ -7,16 +7,16 @@ namespace App\Groups\Auth;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Attributes\Controllers\Middleware;
 use Illuminate\Routing\Redirector;
 
-class EmailVerificationNotification extends Controller
+#[Middleware('auth')]
+#[Middleware('throttle:6,1')]
+readonly class EmailVerificationNotification
 {
     public function __construct(
-        private readonly Redirector $redirect,
+        private Redirector $redirect,
     ) {
-        $this->middleware('auth');
-        $this->middleware('throttle:6,1');
     }
 
     public function __invoke(Request $request): RedirectResponse
