@@ -18,7 +18,7 @@ class Help extends Command
             ['PHP', '>= 8.4'],
             ['Composer', '>= 2.8.1'],
             ['SQLite', '3'],
-            ['Node.js', '>= 22.x'],
+            ['Node.js', '>= 24.x'],
             ['npm', '>= 11.10.0'],
             ['Mailpit', 'https://github.com/axllent/mailpit'],
         ]);
