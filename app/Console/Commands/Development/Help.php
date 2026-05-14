@@ -19,7 +19,7 @@ class Help extends Command
             ['Composer', '>= 2.8.1'],
             ['SQLite', '3'],
             ['Node.js', '>= 24.x'],
-            ['pnpm', '>= see package.json'],
+            ['pnpm', '>= 11.x'],
             ['Mailpit', 'https://github.com/axllent/mailpit'],
         ]);
 
