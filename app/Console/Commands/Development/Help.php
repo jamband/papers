@@ -19,7 +19,7 @@ class Help extends Command
             ['Composer', '>= 2.8.1'],
             ['SQLite', '3'],
             ['Node.js', '>= 24.x'],
-            ['npm', '>= 11.10.0'],
+            ['pnpm', '>= see package.json'],
             ['Mailpit', 'https://github.com/axllent/mailpit'],
         ]);
 
@@ -31,11 +31,11 @@ class Help extends Command
             ['php artisan dusk'],
             ['php artisan down'],
             ['php artisan up'],
-            ['npm run dev'],
-            ['npm run build'],
+            ['pnpm dev'],
+            ['pnpm build'],
         ]);
 
-        $this->warn("\nNote that Mailpit needs to be running for some action.\n".
+        $this->warn("\nNote that Mailpit needs to be running for some action.\n" .
             'e.g. such as register action, forgot password action and browser testing.');
 
         return self::SUCCESS;

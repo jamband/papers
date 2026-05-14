@@ -5,10 +5,10 @@ Papers is a project created as a documentation for authentication with Laravel.
 ## Requirements for development environment
 
 - PHP >= 8.4
-- Composer >= 2.8.1
+- Composer >= 2.9.8
 - SQLite 3
 - Node.js >= 24.x
-- npm >= 11.10.0
+- pnpm >= see package.json
 - [Mailpit](https://github.com/axllent/mailpit)
 
 ## Install on local
@@ -24,7 +24,7 @@ composer run dev
 
 ```
 php artisan serve
-npm run dev
+pnpm dev
 mailpit
 ```
 
